@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Technical Writing — Mickey Farmer</title>
+  <meta name="description" content="Technical writing samples from Mickey Farmer — API docs, platform guides, and developer guides." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/writing.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="back-link" href="index.html">&larr; Back</a>
+    <h1 class="site-title">Technical Writing</h1>
+    <p class="site-subtitle">API docs, platform guides, and developer guides — written for a broad audience, from first-timers to people who live in the product.</p>
+  </header>
+
+  <main class="writing-page">
+
+    <div class="tag-filter" id="tagFilter" role="group" aria-label="Filter by category"></div>
+
+    <div class="writing-list">
+
+      <article class="writing-entry" data-tags="platform-guide">
+        <div class="writing-entry-tags">
+          <span class="tag-pill" data-tag="platform-guide">Platform Guide</span>
+        </div>
+        <h2 class="writing-entry-title">
+          <a href="https://doc.toasttab.com/doc/platformguide/platformCashRoundingOverview.html" target="_blank" rel="noopener">Cash Rounding</a>
+        </h2>
+        <p class="writing-entry-desc">
+          Wrote the platform guide covering Toast's cash rounding feature: the three rounding
+          options merchants can choose from, what guests see at each point in the payment flow,
+          and how the adjustments surface across sales summary, orders, and order-detail reporting.
+        </p>
+        <a class="writing-entry-link" href="https://doc.toasttab.com/doc/platformguide/platformCashRoundingOverview.html" target="_blank" rel="noopener">
+          Read it on doc.toasttab.com &#8599;
+        </a>
+      </article>
+
+      <article class="writing-entry" data-tags="api-reference">
+        <div class="writing-entry-tags">
+          <span class="tag-pill" data-tag="api-reference">API Reference</span>
+        </div>
+        <h2 class="writing-entry-title">
+          <a href="https://doc.toasttab.com/openapi/orders/tag/Orders/" target="_blank" rel="noopener">Orders API</a>
+        </h2>
+        <p class="writing-entry-desc">
+          Major contributor to the reference documentation for Toast's Orders API — the endpoint
+          definitions covering order creation and pricing, adding items to a check, delivery info
+          updates, voids, and the payments and discounts that attach to an order.
+        </p>
+        <a class="writing-entry-link" href="https://doc.toasttab.com/openapi/orders/tag/Orders/" target="_blank" rel="noopener">
+          Read it on doc.toasttab.com &#8599;
+        </a>
+      </article>
+
+      <article class="writing-entry" data-tags="developer-guide">
+        <div class="writing-entry-tags">
+          <span class="tag-pill" data-tag="developer-guide">Developer Guide</span>
+        </div>
+        <h2 class="writing-entry-title">
+          <a href="https://doc.toasttab.com/doc/devguide/apiOrdersFirstOrder.html" target="_blank" rel="noopener">Submitting Your First Order</a>
+        </h2>
+        <p class="writing-entry-desc">
+          Wrote the getting-started guide for the Orders API end to end: authenticating, retrieving
+          dining options and menu data, building and pricing an order payload, submitting it, adding
+          modifiers, and handling the errors you'll actually run into along the way.
+        </p>
+        <a class="writing-entry-link" href="https://doc.toasttab.com/doc/devguide/apiOrdersFirstOrder.html" target="_blank" rel="noopener">
+          Read it on doc.toasttab.com &#8599;
+        </a>
+      </article>
+
+      <!-- More entries coming — duplicate an <article class="writing-entry" data-tags="..."> block above and give it a real data-tags value/tag-pill. The filter bar builds itself from whatever tags show up here. -->
+
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Mickey Farmer</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/writing.js"></script>
+</body>
+</html>

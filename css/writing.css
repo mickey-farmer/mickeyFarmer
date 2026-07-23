@@ -1,0 +1,106 @@
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: color 0.2s ease;
+}
+
+.back-link:hover,
+.back-link:focus-visible {
+  color: var(--text);
+}
+
+.writing-page {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4.5rem;
+}
+
+.tag-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin-bottom: 2rem;
+}
+
+.tag-filter-btn {
+  background: var(--card-bg);
+  color: var(--text-dim);
+  border: none;
+  border-radius: 999px;
+  padding: 0.45rem 1rem;
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.tag-filter-btn:hover {
+  color: var(--text);
+}
+
+.tag-filter-btn.is-active {
+  background: var(--accent-writing);
+  color: var(--text-on-accent);
+}
+
+.writing-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.writing-entry {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+  border-left: 3px solid var(--accent-writing);
+}
+
+.writing-entry-tags {
+  margin-bottom: 0.6rem;
+}
+
+.tag-pill {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
+}
+
+.writing-entry-title {
+  margin: 0 0 0.6rem;
+  font-size: 1.3rem;
+}
+
+.writing-entry-title a {
+  color: var(--text);
+  text-decoration: none;
+}
+
+.writing-entry-title a:hover,
+.writing-entry-title a:focus-visible {
+  text-decoration: underline;
+}
+
+.writing-entry-desc {
+  margin: 0 0 1rem;
+  color: var(--text-dim);
+}
+
+.writing-entry-link {
+  display: inline-block;
+  font-size: 0.9rem;
+  color: var(--accent-writing);
+  text-decoration: none;
+}
+
+.writing-entry-link:hover,
+.writing-entry-link:focus-visible {
+  text-decoration: underline;
+}
