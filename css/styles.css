@@ -129,8 +129,11 @@ body {
 }
 
 .card-icon {
-  width: 44px;
-  height: 44px;
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 110px;
+  height: 110px;
   background-color: var(--icon-default);
   -webkit-mask-image: var(--icon-mask);
   mask-image: var(--icon-mask);
@@ -140,12 +143,16 @@ body {
   mask-repeat: no-repeat;
   -webkit-mask-position: center;
   mask-position: center;
-  transition: background-color 0.3s ease;
+  opacity: 0.16;
+  z-index: -1;
+  pointer-events: none;
+  transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
 .card:hover .card-icon,
 .card:focus-visible .card-icon {
   background-color: var(--icon-hover);
+  opacity: 0.32;
 }
 
 .card-body {
