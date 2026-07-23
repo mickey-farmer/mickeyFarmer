@@ -8,6 +8,13 @@
 // See stories/README.md for the full walkthrough.
 
 window.STORIES = [
+  {
+    slug: "the-understudy",
+    title: "The Understudy",
+    tag: "Short Story",
+    teaser: "Eleven years, four understudied roles, and one hundred and twelve performances watched from a folding chair backstage — until tonight.",
+    date: "2026-07-23",
+  },
   // {
   //   slug: "my-story-slug",      // must match stories/<slug>.md exactly
   //   title: "My Story Title",

@@ -135,7 +135,7 @@ body {
   width: 120px;
   height: 120px;
   color: var(--icon-default);
-  opacity: 0.24;
+  opacity: 0.4;
   z-index: 0;
   pointer-events: none;
   transition: color 0.3s ease, opacity 0.3s ease;
@@ -145,13 +145,12 @@ body {
   display: block;
   width: 100%;
   height: 100%;
-  fill: currentColor;
 }
 
 .card:hover .card-icon,
 .card:focus-visible .card-icon {
   color: var(--icon-hover);
-  opacity: 0.42;
+  opacity: 0.6;
 }
 
 .card-body {
