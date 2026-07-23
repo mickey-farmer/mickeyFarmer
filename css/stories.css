@@ -1,0 +1,85 @@
+.story-entry {
+  border-left-color: var(--accent-stories);
+}
+
+.empty-state {
+  color: var(--text-dim);
+  font-style: italic;
+  text-align: center;
+  padding: 2rem 0;
+}
+
+.story-header {
+  padding-bottom: 2rem;
+}
+
+.story-page {
+  max-width: 680px;
+  margin: 0 auto;
+  padding: 1rem 1.5rem 5rem;
+}
+
+.story-meta {
+  margin-bottom: 2rem;
+}
+
+.story-meta .tag-pill {
+  margin-bottom: 0.75rem;
+}
+
+.story-title {
+  margin: 0 0 0.4rem;
+  font-size: 2rem;
+  line-height: 1.2;
+}
+
+.story-date {
+  margin: 0;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+/* Typography for the rendered markdown body */
+.story-content {
+  font-size: 1.05rem;
+  line-height: 1.75;
+}
+
+.story-content h1,
+.story-content h2,
+.story-content h3 {
+  margin: 2rem 0 0.75rem;
+  line-height: 1.3;
+}
+
+.story-content p {
+  margin: 0 0 1.25rem;
+}
+
+.story-content blockquote {
+  margin: 0 0 1.25rem;
+  padding-left: 1rem;
+  border-left: 3px solid var(--accent-stories);
+  color: var(--text-dim);
+}
+
+.story-content ul,
+.story-content ol {
+  margin: 0 0 1.25rem;
+  padding-left: 1.5rem;
+}
+
+.story-content a {
+  color: var(--accent-stories);
+}
+
+.story-content hr {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  margin: 2.5rem 0;
+}
+
+.story-content img {
+  max-width: 100%;
+  border-radius: 8px;
+}

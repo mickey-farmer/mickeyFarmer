@@ -5,15 +5,27 @@ Personal splash site for Mickey Farmer — Acting, Technical Writing, and Game &
 ## Structure
 
 ```
-index.html          splash page with the category cards
-css/styles.css       gray theme + per-card colorful hover effect
-js/script.js         small hook (currently just sets the footer year)
-assets/icons/        line-art SVGs used as CSS mask icons on each card
-media/               drop real photos/screenshots here, one folder per category
+index.html           splash page with the top-level category cards
+writing.html          Technical Writing samples (links out to published docs)
+gamedev.html          Game & Story Development hub — two sub-cards: Games, Short Stories & Scripts
+stories.html          list of standalone stories/scripts (hosted only here)
+story.html            reader template — renders stories/<slug>.md for a given ?slug=
+stories/              story content as plain Markdown files, see stories/README.md
+css/styles.css        gray theme + per-card colorful hover effect (shared everywhere)
+css/writing.css       shared list/entry styling for writing.html and stories.html
+css/stories.css       story-specific bits (list accent color, reader typography)
+js/script.js          small hook (currently just sets the footer year)
+js/writing.js         builds the tag filter on writing.html
+js/stories-data.js    manifest of stories (title, tag, teaser, date) — edit this to add one
+js/stories.js         renders the story list + tag filter on stories.html from the manifest
+js/story.js           fetches and renders a single story's Markdown on story.html
+assets/icons/         line-art SVGs used as CSS mask icons on each card
+media/                drop real photos/screenshots here, one folder per category
 ```
 
 - The **Acting** card links out to mickeyonstage.com.
-- **Technical Writing** and **Game & Story Development** are placeholder "coming soon" cards — give them real `href`s (or build subpages) once there's content to link to.
+- **Technical Writing** links to `writing.html`, a list of samples that link out to published docs.
+- **Game & Story Development** links to `gamedev.html`, which splits into **Games** (still "coming soon") and **Short Stories & Scripts** (`stories.html`), where stories are hosted directly on this site — see `stories/README.md` for how to add one.
 - **Dancing** is commented out in `index.html`. Once there are photos in `media/dancing/`, uncomment that block.
 
 ## Publishing with GitHub Pages
