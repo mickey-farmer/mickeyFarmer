@@ -1,0 +1,206 @@
+:root {
+  /* Neutral gray palette — deliberately neither a "light" nor a "dark" theme */
+  --bg: #4d4d54;
+  --bg-header: #454549;
+  --card-bg: #5a5a61;
+  --icon-default: #9c9ba1;
+  --icon-hover: #1c1c1f;
+  --text: #f1f0ee;
+  --text-dim: #c7c6c9;
+  --text-on-accent: #1c1c1f;
+  --radius: 14px;
+
+  --accent-acting: #e0a458;
+  --accent-writing: #4fc3c9;
+  --accent-gamedev: #9b6fd1;
+  --accent-dancing: #e0559e;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+}
+
+.site-header {
+  text-align: center;
+  padding: 4.5rem 1.5rem 2.5rem;
+  background: var(--bg-header);
+}
+
+.site-title {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+.site-subtitle {
+  margin: 0.6rem 0 0;
+  color: var(--text-dim);
+  font-size: 1.05rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 4.5rem;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.1rem;
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  padding: 2rem 1.75rem;
+  text-decoration: none;
+  color: inherit;
+  overflow: hidden;
+  isolation: isolate;
+  cursor: pointer;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.card--soon {
+  cursor: default;
+}
+
+/* Colorful reveal on hover — sits behind the content, faded out by default */
+.card::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(135deg, var(--accent), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.card:hover,
+.card:focus-visible {
+  transform: translateY(-4px);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+}
+
+.card:hover::before,
+.card:focus-visible::before {
+  opacity: 0.9;
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+.card-icon {
+  width: 44px;
+  height: 44px;
+  background-color: var(--icon-default);
+  -webkit-mask-image: var(--icon-mask);
+  mask-image: var(--icon-mask);
+  -webkit-mask-size: contain;
+  mask-size: contain;
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-position: center;
+  mask-position: center;
+  transition: background-color 0.3s ease;
+}
+
+.card:hover .card-icon,
+.card:focus-visible .card-icon {
+  background-color: var(--icon-hover);
+}
+
+.card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.card-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.card-desc {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+  transition: color 0.3s ease;
+}
+
+.card:hover .card-title,
+.card:hover .card-desc,
+.card:focus-visible .card-title,
+.card:focus-visible .card-desc {
+  color: var(--text-on-accent);
+}
+
+.card-link-indicator {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-size: 1.2rem;
+  color: var(--text-dim);
+  transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.card:hover .card-link-indicator {
+  color: var(--text-on-accent);
+  transform: translateX(3px);
+}
+
+.card-badge {
+  position: absolute;
+  top: 1.25rem;
+  right: 1.25rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  background: rgba(0, 0, 0, 0.25);
+  padding: 0.25rem 0.6rem;
+  border-radius: 999px;
+  color: var(--text-dim);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.card--soon:hover .card-badge {
+  background: rgba(255, 255, 255, 0.35);
+  color: var(--text-on-accent);
+}
+
+.site-footer {
+  text-align: center;
+  padding: 2rem 1rem 3rem;
+  color: var(--text-dim);
+  font-size: 0.85rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card,
+  .card::before,
+  .card-icon,
+  .card-title,
+  .card-desc,
+  .card-link-indicator,
+  .card-badge {
+    transition: none;
+  }
+}

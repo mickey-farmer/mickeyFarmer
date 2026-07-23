@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mickey Farmer</title>
+  <meta name="description" content="Mickey Farmer — Acting, Technical Writing, and Game &amp; Story Development." />
+  <link rel="stylesheet" href="css/styles.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <h1 class="site-title">Mickey Farmer</h1>
+    <p class="site-subtitle">Actor. Writer. Maker of things.</p>
+  </header>
+
+  <main class="card-grid">
+
+    <!-- Acting -->
+    <a class="card" href="https://mickeyonstage.com" target="_blank" rel="noopener" style="--accent: var(--accent-acting); --icon-mask: url('assets/icons/acting.svg');">
+      <span class="card-icon" aria-hidden="true"></span>
+      <span class="card-body">
+        <span class="card-title">Acting</span>
+        <span class="card-desc">Stage &amp; screen work — visit mickeyonstage.com</span>
+      </span>
+      <span class="card-link-indicator" aria-hidden="true">&rarr;</span>
+    </a>
+
+    <!--
+    Dancing card — commented out until there's material to show.
+    Uncomment and give it a real destination once ready.
+
+    <a class="card" href="#" style="--accent: var(--accent-dancing); --icon-mask: url('assets/icons/dancing.svg');">
+      <span class="card-icon" aria-hidden="true"></span>
+      <span class="card-body">
+        <span class="card-title">Dancing</span>
+        <span class="card-desc">Coming soon</span>
+      </span>
+      <span class="card-link-indicator" aria-hidden="true">&rarr;</span>
+    </a>
+    -->
+
+    <!-- Technical Writing -->
+    <div class="card card--soon" style="--accent: var(--accent-writing); --icon-mask: url('assets/icons/writing.svg');">
+      <span class="card-icon" aria-hidden="true"></span>
+      <span class="card-body">
+        <span class="card-title">Technical Writing</span>
+        <span class="card-desc">Coming soon</span>
+      </span>
+      <span class="card-badge">Soon</span>
+    </div>
+
+    <!-- Game & Story Development -->
+    <div class="card card--soon" style="--accent: var(--accent-gamedev); --icon-mask: url('assets/icons/gamedev.svg');">
+      <span class="card-icon" aria-hidden="true"></span>
+      <span class="card-body">
+        <span class="card-title">Game &amp; Story Development</span>
+        <span class="card-desc">Coming soon</span>
+      </span>
+      <span class="card-badge">Soon</span>
+    </div>
+
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Mickey Farmer</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
