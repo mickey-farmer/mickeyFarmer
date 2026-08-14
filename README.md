@@ -91,7 +91,8 @@ serves both the teal Technical Writing page and the blue Stories page without a 
   - A group with no certificates yet renders nothing, and `js/certifications.js` also removes that
     category from the sidebar so the nav never points at a missing anchor.
   - PDFs are only fetched when a row is expanded, so the page stays light as this list grows.
-  - The bottom of `certs-data.js` tracks certificates that still need their PDF copied in.
+  - Set `landscape: false` for a portrait PDF (e.g. a print-to-PDF web certificate) so the
+    embedded viewer uses the right aspect ratio.
 - **Prompt Engineering** — `prompting.html`. The nav's sub-items switch sections
   (hash-routed, so `prompting.html#portfolio` is linkable):
   - **Certification** — one `<details class="cert">` block per credential. The PDF only downloads

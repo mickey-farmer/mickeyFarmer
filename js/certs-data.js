@@ -14,18 +14,32 @@
 //   date       human-readable, as printed ("August 13, 2026")
 //   sort       YYYY-MM-DD, used to order newest-first within a group
 //   file       filename inside assets/certificates/
-//   landscape  true for 792x612 Coursera-style certs (most are), false for
-//              portrait PDFs — sets the embedded viewer's aspect ratio
+//   landscape  true for the 792x612 Coursera-style certs (most of them).
+//              false for a portrait page — sets the embedded viewer's ratio.
 //   instructor optional
 //   verifyUrl  optional public verification link
+//
+// Every title, date, issuer and verification code below was read out of the
+// PDF itself rather than inferred from a filename. The one exception is the
+// TWHQ certificate — see the note on that entry.
 // ============================================================================
 
 window.CERT_GROUPS = [
   {
     id: "technical-writing",
     label: "Technical Writing",
-    blurb: "The craft itself — structure, style, and writing for developer audiences.",
+    blurb: "The craft itself — structure, style, and writing for a reader who's mid-task.",
     certs: [
+      {
+        title: "Technical Communication Essentials",
+        issuer: "Minnesota State University, Mankato via Coursera",
+        date: "August 14, 2026",
+        sort: "2026-08-14",
+        file: "minnesota-state-technical-communication-essentials.pdf",
+        landscape: true,
+        instructor: "Abigail Bakke, Ph.D., Associate Professor of Technical Communication",
+        verifyUrl: "https://coursera.org/verify/JE618SYWPDG6",
+      },
       {
         title: "Introduction to Technical Writing",
         issuer: "Board Infinity via Coursera",
@@ -36,14 +50,35 @@ window.CERT_GROUPS = [
         instructor: "Abhay Gupta, Co-Founder, Board Infinity",
         verifyUrl: "https://coursera.org/verify/AXML83CA7Q4Z",
       },
-      // Awaiting the PDF — see the two entries in PENDING at the bottom of this
-      // file (MIPT tech writing, twhqcertificate).
+      {
+        // No date is printed on this certificate and there's no public
+        // verification link. The date below is the PDF's creation timestamp,
+        // which is the best available evidence — worth confirming against your
+        // own records before treating it as exact.
+        title: "Certified Technical Writer",
+        issuer: "Technical Writer HQ",
+        date: "June 2021",
+        sort: "2021-06-18",
+        file: "twhq-certified-technical-writer.pdf",
+        landscape: true,
+        instructor: "Josh Fechter, Instructor · Obaid Khan, School Director",
+      },
+      {
+        title: "Technical Writing",
+        issuer: "Moscow Institute of Physics and Technology via Coursera",
+        date: "October 26, 2020",
+        sort: "2020-10-26",
+        file: "mipt-technical-writing.pdf",
+        landscape: true,
+        instructor: "Elena Bazanova, PhD — Director, Language Training and Testing Center",
+        verifyUrl: "https://coursera.org/verify/5FW2F5BRCFXS",
+      },
     ],
   },
   {
     id: "api-documentation",
     label: "API Documentation",
-    blurb: "Documenting, testing, and shipping APIs.",
+    blurb: "Producing the reference material itself, and the tooling around it.",
     certs: [
       {
         title: "Document AI: Project & API Writing",
@@ -54,6 +89,16 @@ window.CERT_GROUPS = [
         landscape: true,
         instructor: "ansrsource instructors",
         verifyUrl: "https://coursera.org/verify/SQ7TYBU2VTEN",
+      },
+      {
+        title: "Generate API Documentation from Postman",
+        issuer: "Coursera Project Network",
+        date: "June 16, 2022",
+        sort: "2022-06-16",
+        file: "coursera-generate-api-documentation-postman.pdf",
+        landscape: true,
+        instructor: "Monika Singh, Software Engineer",
+        verifyUrl: "https://coursera.org/verify/GJK9UGX46LAF",
       },
     ],
   },
@@ -77,56 +122,90 @@ window.CERT_GROUPS = [
   {
     id: "engineering",
     label: "Engineering",
-    blurb: "Enough of the stack to document it honestly.",
+    blurb: "Enough of the stack to read it, test it, and document it honestly.",
     certs: [
-      // Awaiting PDFs — Ruby, Rails, API Testing, Postman API Documentation.
+      {
+        title: "API Testing a real web application via Postman",
+        issuer: "Coursera Project Network",
+        date: "June 16, 2022",
+        sort: "2022-06-16",
+        file: "coursera-api-testing-postman.pdf",
+        landscape: true,
+        instructor: "Saurabh Dhingra, DevOps Trainer and Consultant",
+        verifyUrl: "https://coursera.org/verify/9KSTPH683UJP",
+      },
+      {
+        title: "Learn Ruby on Rails",
+        issuer: "Codecademy",
+        date: "January 13, 2021",
+        sort: "2021-01-13",
+        // Print-to-PDF of the web certificate, so the page is portrait with a
+        // landscape certificate on it.
+        file: "codecademy-learn-ruby-on-rails.pdf",
+        landscape: false,
+      },
+      {
+        title: "Learn Ruby",
+        issuer: "Codecademy",
+        date: "January 7, 2021",
+        sort: "2021-01-07",
+        file: "codecademy-learn-ruby.pdf",
+        landscape: false,
+      },
     ],
   },
   {
     id: "project-management",
     label: "Project Management",
-    blurb: "Running the work, not just writing about it.",
+    blurb: "Running the work, not just documenting it. Both from Google's PM track.",
     certs: [
-      // Awaiting PDFs — Foundations of Project Management, Starting a
-      // Successful Project.
+      {
+        title: "Project Initiation: Starting a Successful Project",
+        issuer: "Google via Coursera",
+        date: "February 8, 2024",
+        sort: "2024-02-08",
+        file: "google-project-initiation.pdf",
+        landscape: true,
+        instructor: "Amanda Brophy, Global Director of Google Career Certificates",
+        verifyUrl: "https://coursera.org/verify/8LCTWYYJKUQQ",
+      },
+      {
+        title: "Foundations of Project Management",
+        issuer: "Google via Coursera",
+        date: "June 12, 2022",
+        sort: "2022-06-12",
+        file: "google-foundations-project-management.pdf",
+        landscape: true,
+        instructor: "Amanda Brophy, Global Director of Google Career Certificates",
+        verifyUrl: "https://coursera.org/verify/XX6FY2WDGQN9",
+      },
     ],
   },
   {
     id: "game-design",
     label: "Game Design",
-    blurb: "Systems and player-facing storytelling.",
+    blurb: "Systems, and the storytelling players actually move through.",
     certs: [
-      // Awaiting PDFs — Intro to Game Design, plus one more Coursera cert.
+      {
+        title: "Story and Narrative Development for Video Games",
+        issuer: "California Institute of the Arts via Coursera",
+        date: "May 13, 2026",
+        sort: "2026-05-13",
+        file: "calarts-story-narrative-development-video-games.pdf",
+        landscape: true,
+        instructor: "Dariush Derakhshani, Faculty — Character Animation",
+        verifyUrl: "https://coursera.org/verify/KUSNH4I7D2V3",
+      },
+      {
+        title: "Introduction to Game Design",
+        issuer: "California Institute of the Arts via Coursera",
+        date: "February 13, 2024",
+        sort: "2024-02-13",
+        file: "calarts-introduction-game-design.pdf",
+        landscape: true,
+        instructor: "Fran Krause, Faculty — Character Animation",
+        verifyUrl: "https://coursera.org/verify/BUJ53J2GFZ96",
+      },
     ],
   },
 ];
-
-// ============================================================================
-// PENDING — 10 certificates that couldn't be read yet.
-//
-// These PDFs live in Google Drive but were cloud-only placeholders at the time
-// this file was written, so their exact titles, dates, issuers and verification
-// links are UNCONFIRMED. Filenames below are the Drive originals.
-//
-// To finish them:
-//   1. In Finder, right-click the Certificates folder ->
-//      Offline access -> Available offline.
-//   2. Copy each PDF into assets/certificates/ with a clean filename.
-//   3. Move the entry up into the matching group above, filling in the real
-//      title/date/issuer from the certificate itself.
-//
-//   Engineering/
-//     RubyCertificate.pdf
-//     RailsCertificate.pdf
-//     API testing.pdf
-//     API documentation from Postman.pdf
-//   Tech Writing/
-//     MIPT tech writing.pdf
-//     twhqcertificate.pdf
-//   Project Management/
-//     Foundations of PM.pdf
-//     Starting a successful project.pdf
-//   Game Design/
-//     Intro to game design.pdf
-//     Coursera KUSNH4I7D2V3.pdf
-// ============================================================================
