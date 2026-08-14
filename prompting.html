@@ -145,13 +145,15 @@
                   </h4>
                   <div class="prompt-block">
                     <button class="prompt-copy" type="button">Copy</button>
-                    <pre><code>You are a technical documentation reviewer. Evaluate the article below against these 5 criteria, scoring each 1-5:
+                    <pre><code>You are a Senior Technical Writer reviewing technical documentation. Evaluate the article below against these 5 criteria, scoring each 1-5:
 
 1. CLARITY: Can a reader unfamiliar with the topic follow it on first read?
 2. COMPLETENESS: Are prerequisites, steps, and expected outcomes all covered?
 3. STRUCTURE: Are headings, lists, and code blocks used appropriately for scannability?
-4. ACCURACY OF TONE: Does it match our style guide (active voice, second person, no jargon without definition)?
+4. ACCURACY OF TONE: Does it match our style guide (see below for link to style guide)?
 5. ACTIONABILITY: Could someone complete the task using only this doc?
+
+Style guide: {{PATH}}
 
 For each criterion, provide:
 - Score (1-5)
@@ -168,10 +170,75 @@ Article:
                 <div class="prompt-eval">
                   <h4 class="prompt-eval-label">How I'd evaluate it</h4>
                   <p>
-                    Run it against 10 docs I already know are strong vs. weak (from past editing
-                    experience), check whether the AI's PASS/FAIL matches my own judgment, and adjust
+                    Run it against a minimum of five different docs that cover different areas of documentation. Based on past editing experience, how accurate does the LLM get to a completed work? Check whether the AI's PASS/FAIL matches my own judgment, and adjust
                     the rubric language wherever it disagrees with me — the same precision/recall idea
                     as call scoring.
+                  </p>
+                </div>
+              </div>
+            </details>
+          </article>
+
+          <article class="prompt-card">
+            <details class="prompt-details">
+              <summary class="prompt-summary">
+                <span class="prompt-summary-main">
+                  <span class="tag-pill">Extraction</span>
+                  <span class="prompt-title">Meeting Notes &rarr; Action Items</span>
+                  <span class="prompt-teaser">Pulls only real commitments out of messy notes, with owners and a quote to check against.</span>
+                </span>
+                <span class="prompt-chevron" aria-hidden="true">&#9662;</span>
+              </summary>
+
+              <div class="prompt-body">
+                <p class="prompt-context">
+                  The hard part of extraction isn't finding candidates — it's refusing the ones that
+                  only look like commitments. This version sets an explicit bar for what counts and
+                  makes the output auditable.
+                </p>
+
+                <div class="prompt-stage">
+                  <h4 class="prompt-stage-label">
+                    <span class="prompt-stage-badge prompt-stage-badge--v1">v1</span>
+                    Rough first pass
+                  </h4>
+                  <div class="prompt-block">
+                    <button class="prompt-copy" type="button">Copy</button>
+                    <pre><code>Pull out the action items from these meeting notes.</code></pre>
+                  </div>
+                  <p class="prompt-problem">
+                    <strong>Problem:</strong> No structure — output format varies every run, no
+                    owner/deadline capture, and it grabs vague statements ("we should think about X")
+                    as if they were real commitments.
+                  </p>
+                </div>
+
+                <div class="prompt-stage">
+                  <h4 class="prompt-stage-label">
+                    <span class="prompt-stage-badge prompt-stage-badge--final">Final</span>
+                    Final version
+                  </h4>
+                  <div class="prompt-block">
+                    <button class="prompt-copy" type="button">Copy</button>
+                    <pre><code>Extract action items from the meeting notes below. Only include items that have a clear owner AND a clear next step — skip vague discussion points or ideas without commitment.
+
+Output as a table with these columns:
+| Action Item | Owner | Due Date (or "not specified") | Source Quote |
+
+If no owner is stated, write "UNASSIGNED" and flag it separately at the end under "Needs Owner."
+
+Meeting notes:
+[INSERT TEXT]</code></pre>
+                  </div>
+                </div>
+
+                <div class="prompt-eval">
+                  <h4 class="prompt-eval-label">Iteration note</h4>
+                  <p>
+                    Added the "clear owner AND clear next step" filter after v1 kept treating
+                    brainstorming as commitments. Added the "Source Quote" column so someone can
+                    double check the extraction against the original text instead of just trusting
+                    the output.
                   </p>
                 </div>
               </div>
