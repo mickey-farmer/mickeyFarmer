@@ -8,32 +8,25 @@
   <link rel="stylesheet" href="css/styles.css" />
   <link rel="stylesheet" href="css/prompting.css" />
 </head>
-<body>
+<body data-page="prompting" data-theme="prompting">
 
-  <header class="site-header">
-    <a class="back-link" href="index.html">&larr; Back</a>
-    <h1 class="site-title">Prompt Engineering</h1>
-    <p class="site-subtitle">Certifications, plus a portfolio of prompts shown the honest way — rough first pass, what was wrong with it, and where it landed.</p>
-  </header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="docs-layout">
+  <div class="site-shell">
 
-    <!-- Left-hand documentation nav -->
-    <aside class="docs-sidebar">
-      <nav class="docs-nav" aria-label="Prompt Engineering sections">
-        <p class="docs-nav-label">Prompt Engineering</p>
-        <ul class="docs-nav-list">
-          <li>
-            <a class="docs-nav-link is-active" href="#certification" data-section="certification">Certification</a>
-          </li>
-          <li>
-            <a class="docs-nav-link" href="#portfolio" data-section="portfolio">Portfolio</a>
-          </li>
-        </ul>
-      </nav>
-    </aside>
+    <!-- Sidebar is rendered by js/nav.js. Certification and Portfolio are
+         declared there as children of Prompt Engineering. -->
+    <div class="site-sidebar" id="siteNav"></div>
 
-    <main class="docs-content">
+    <div class="site-body">
+
+      <header class="site-header">
+        <span class="site-eyebrow">Prompt Engineering</span>
+        <h1 class="site-title">Certification &amp; Portfolio</h1>
+        <p class="site-subtitle">Prompts shown the honest way — rough first pass, what was wrong with it, and where it landed.</p>
+      </header>
+
+      <main class="site-content docs-page" id="main">
 
       <!-- ==================== CERTIFICATION ==================== -->
       <section class="docs-section is-active" id="certification" data-section="certification" tabindex="-1">
@@ -248,13 +241,16 @@ Meeting notes:
         </div>
       </section>
 
-    </main>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Mickey Farmer</p>
+      </footer>
+
+    </div>
   </div>
 
-  <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Mickey Farmer</p>
-  </footer>
-
+  <script src="js/nav.js"></script>
   <script src="js/script.js"></script>
   <script src="js/prompting.js"></script>
 </body>

@@ -1,22 +1,15 @@
-.story-entry {
-  border-left-color: var(--accent-stories);
-}
+/* Story-specific bits. Accent comes from var(--accent) — stories.html and
+   story.html both use <body data-theme="stories">. */
 
 .empty-state {
   color: var(--text-dim);
   font-style: italic;
-  text-align: center;
   padding: 2rem 0;
-}
-
-.story-header {
-  padding-bottom: 2rem;
 }
 
 .story-page {
   max-width: 680px;
-  margin: 0 auto;
-  padding: 1rem 1.5rem 5rem;
+  padding: 2.5rem 2.5rem 5rem;
 }
 
 .story-meta {
@@ -59,7 +52,7 @@
 .story-content blockquote {
   margin: 0 0 1.25rem;
   padding-left: 1rem;
-  border-left: 3px solid var(--accent-stories);
+  border-left: 3px solid var(--accent);
   color: var(--text-dim);
 }
 
@@ -70,16 +63,69 @@
 }
 
 .story-content a {
-  color: var(--accent-stories);
+  color: var(--accent);
+}
+
+.story-content code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, monospace;
+  font-size: 0.9em;
+  background: var(--code-bg);
+  border-radius: 4px;
+  padding: 0.1em 0.35em;
+}
+
+/* Markdown is rendered from arbitrary story files, so guard the two elements
+   that can be wider than the column and force a page-level scrollbar. */
+.story-content pre {
+  margin: 0 0 1.25rem;
+  padding: 1rem 1.1rem;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  overflow-x: auto;
+}
+
+.story-content pre code {
+  background: none;
+  border-radius: 0;
+  padding: 0;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.story-content table {
+  display: block;
+  width: 100%;
+  margin: 0 0 1.25rem;
+  overflow-x: auto;
+  border-collapse: collapse;
+  font-size: 0.94rem;
+}
+
+.story-content th,
+.story-content td {
+  border: 1px solid var(--border-hi);
+  padding: 0.5rem 0.7rem;
+  text-align: left;
+}
+
+.story-content th {
+  background: var(--code-bg);
 }
 
 .story-content hr {
   border: none;
-  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  border-top: 1px solid var(--border-hi);
   margin: 2.5rem 0;
 }
 
 .story-content img {
   max-width: 100%;
-  border-radius: 8px;
+  border-radius: var(--radius-sm);
+}
+
+@media (max-width: 900px) {
+  .story-page {
+    padding: 1.75rem 1.5rem 3.5rem;
+  }
 }

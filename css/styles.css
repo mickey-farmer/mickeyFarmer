@@ -1,23 +1,63 @@
-:root {
-  /* Neutral gray palette — deliberately neither a "light" nor a "dark" theme */
-  --bg: #4d4d54;
-  --bg-header: #454549;
-  --card-bg: #5a5a61;
-  --icon-default: #9c9ba1;
-  --icon-hover: #1c1c1f;
-  --text: #f1f0ee;
-  --text-dim: #c7c6c9;
-  --text-on-accent: #1c1c1f;
-  --radius: 14px;
+/* ============================================================================
+   Core theme + app shell. Loaded on every page.
 
-  --accent-acting: #e0a458;
-  --accent-writing: #4fc3c9;
-  --accent-prompting: #7fc98a;
-  --accent-gamedev: #9b6fd1;
-  --accent-dancing: #e0559e;
-  --accent-games: #9b6fd1;
-  --accent-stories: #5b9bd9;
+   Colors: a cool blue-gray chrome that stays constant site-wide, plus one
+   --accent per section. Set the accent by putting data-theme on <body>:
+
+       <body data-page="writing" data-theme="writing">
+
+   Section CSS (writing.css, stories.css, prompting.css) should reference
+   var(--accent) rather than a specific color, so a page picks up the right
+   accent automatically from its theme.
+   ========================================================================= */
+
+:root {
+  /* Blue-gray chrome */
+  --bg: #232830;
+  --bg-header: #1b1f26;
+  --bg-sidebar: #1b1f26;
+  --card-bg: #2d333d;
+  --card-bg-hi: #353c47;
+  --code-bg: rgba(10, 13, 18, 0.45);
+
+  --border: rgba(255, 255, 255, 0.09);
+  --border-hi: rgba(255, 255, 255, 0.16);
+
+  --text: #eceff4;
+  --text-dim: #9aa5b4;
+  /* Kept at >=4.5:1 against every surface here (bg 5.3, card 4.5, sidebar 5.9)
+     so it stays legible where it's used for real text, not just decoration. */
+  --text-faint: #909bab;
+  --text-on-accent: #12161c;
+
+  --radius: 14px;
+  --radius-sm: 8px;
+  --sidebar-w: 244px;
+  --content-max: 820px;
+
+  /* Per-section accents. Cool by default, warmer only where the content
+     earns it (Acting is a stage, not a doc site). */
+  /* Each accent is light enough that --text-on-accent reads at >=6:1 on top of
+     it, which is what makes the card hover state safe. */
+  --accent-home: #7f9cc0;
+  --accent-writing: #45b6c4;
+  --accent-prompting: #6cc189;
+  --accent-gamedev: #a68cdb;
+  --accent-stories: #6ea9e0;
+  --accent-acting: #dfa25c;
+  /* Used by the commented-out Dancing card in index.html. */
+  --accent-dancing: #d4699e;
+
+  /* Fallback so anything referencing --accent works even without a theme. */
+  --accent: var(--accent-home);
 }
+
+body[data-theme="home"]      { --accent: var(--accent-home); }
+body[data-theme="writing"]   { --accent: var(--accent-writing); }
+body[data-theme="prompting"] { --accent: var(--accent-prompting); }
+body[data-theme="gamedev"]   { --accent: var(--accent-gamedev); }
+body[data-theme="stories"]   { --accent: var(--accent-stories); }
+body[data-theme="acting"]    { --accent: var(--accent-acting); }
 
 * {
   box-sizing: border-box;
@@ -35,38 +75,211 @@ body {
   line-height: 1.5;
 }
 
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  background: var(--accent);
+  color: var(--text-on-accent);
+  font-size: 0.9rem;
+  border-radius: 0 0 var(--radius-sm) 0;
+}
+
+.skip-link:focus {
+  left: 0;
+}
+
+/* ============================================================================
+   Shell: fixed sidebar + scrolling content
+   ========================================================================= */
+
+.site-shell {
+  display: grid;
+  grid-template-columns: var(--sidebar-w) minmax(0, 1fr);
+  min-height: 100vh;
+}
+
+.site-body {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+/* ============================================================================
+   Sidebar
+   ========================================================================= */
+
+.site-sidebar {
+  position: sticky;
+  top: 0;
+  align-self: start;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1.75rem 1rem 2rem;
+  background: var(--bg-sidebar);
+  border-right: 1px solid var(--border);
+}
+
+.nav-brand {
+  display: block;
+  padding: 0 0.75rem 1.5rem;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.nav-brand-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.01em;
+}
+
+.nav-brand:hover .nav-brand-name,
+.nav-brand:focus-visible .nav-brand-name {
+  color: var(--accent);
+}
+
+.nav-list,
+.nav-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-link {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: var(--radius-sm);
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.94rem;
+  transition: color 0.18s ease, background-color 0.18s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+/* Current page/section. The accent bar comes from the parent li so the
+   indicator can sit flush against the sublist rail. */
+.nav-link.is-current {
+  color: var(--text);
+  font-weight: 600;
+  background: rgba(255, 255, 255, 0.07);
+}
+
+/* The accent rail marks the section you're in. It's driven by .is-section, not
+   .is-current, so pages that live under a section (stories.html, story.html)
+   still light up their parent even though the child is the exact match. */
+.nav-item--depth0 > .nav-link.is-current,
+.nav-item--depth0 > .nav-link.is-section {
+  box-shadow: inset 2px 0 0 var(--accent);
+}
+
+.nav-item--depth0 > .nav-link.is-section {
+  color: var(--text);
+}
+
+.nav-link--soon {
+  color: var(--text-faint);
+  cursor: default;
+}
+
+.nav-soon-badge {
+  font-size: 0.62rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.1rem 0.4rem;
+  border-radius: 999px;
+  border: 1px solid var(--border-hi);
+  color: var(--text-faint);
+}
+
+.nav-external-arrow {
+  font-size: 0.8rem;
+  color: var(--text-faint);
+}
+
+.nav-link--external:hover .nav-external-arrow {
+  color: var(--accent);
+}
+
+/* Child items sit on a rail so the hierarchy reads at a glance. */
+.nav-sublist {
+  margin: 0.15rem 0 0.35rem 1.1rem;
+  padding-left: 0.35rem;
+  border-left: 1px solid var(--border-hi);
+}
+
+.nav-item--depth1 > .nav-link {
+  font-size: 0.88rem;
+  padding: 0.38rem 0.65rem;
+}
+
+.nav-item--depth1 > .nav-link.is-current {
+  color: var(--accent);
+  background: transparent;
+}
+
+.nav-toggle {
+  display: none;
+}
+
+/* ============================================================================
+   Page header
+   ========================================================================= */
+
 .site-header {
-  text-align: center;
-  padding: 4.5rem 1.5rem 2.5rem;
+  padding: 3.25rem 2.5rem 2.25rem;
   background: var(--bg-header);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header::after {
+  content: "";
+  display: block;
+  width: 46px;
+  height: 3px;
+  margin-top: 1.25rem;
+  border-radius: 999px;
+  background: var(--accent);
 }
 
 .site-title {
   margin: 0;
-  font-size: 2.5rem;
+  font-size: 2.1rem;
   font-weight: 700;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 
 .site-subtitle {
-  margin: 0.6rem 0 0;
+  margin: 0.65rem 0 0;
+  max-width: 62ch;
   color: var(--text-dim);
-  font-size: 1.05rem;
+  font-size: 1.02rem;
 }
 
-.card-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 1.5rem;
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 3rem 1.5rem 4.5rem;
+.site-eyebrow {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--accent);
 }
 
-.card-grid--sub {
-  max-width: 700px;
-}
-
+/* The old per-page "Back" link is redundant now that the sidebar is
+   everywhere, but story.html still uses one to get back to the list. */
 .back-link {
   display: inline-block;
   margin-bottom: 1rem;
@@ -81,6 +294,38 @@ body {
   color: var(--text);
 }
 
+/* ============================================================================
+   Home: hero + cards
+   ========================================================================= */
+
+.home-header {
+  padding: 4.5rem 2.5rem 3rem;
+}
+
+.home-header .site-title {
+  font-size: 2.9rem;
+}
+
+.home-intro {
+  margin: 1rem 0 0;
+  max-width: 54ch;
+  color: var(--text-dim);
+  font-size: 1.1rem;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(258px, 1fr));
+  gap: 1.25rem;
+  max-width: 1000px;
+  margin: 0;
+  padding: 2.5rem 2.5rem 4rem;
+}
+
+.card-grid--sub {
+  max-width: 720px;
+}
+
 .card {
   position: relative;
   display: flex;
@@ -88,58 +333,106 @@ body {
   align-items: flex-start;
   gap: 1.1rem;
   background: var(--card-bg);
+  border: 1px solid var(--border);
   border-radius: var(--radius);
-  padding: 2rem 1.75rem;
+  padding: 1.75rem 1.6rem;
   text-decoration: none;
   color: inherit;
   overflow: hidden;
   isolation: isolate;
   cursor: pointer;
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  transition: transform 0.22s ease, box-shadow 0.22s ease, border-color 0.22s ease;
 }
 
 .card--soon {
   cursor: default;
 }
 
-/* Colorful reveal on hover — sits behind the content, faded out by default */
+/* Accent wash on hover, behind the content.
+   The accent layer is deliberately SOLID rather than a fade-to-transparent
+   gradient: the card text flips to --text-on-accent (near-black) on hover, and
+   a gradient that fades out leaves the lower text sitting on dark-on-dark. The
+   sheen on top gives it depth without thinning the base. */
 .card::before {
   content: "";
   position: absolute;
   inset: 0;
   z-index: -1;
-  background: linear-gradient(135deg, var(--accent), transparent 70%);
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.18), rgba(255, 255, 255, 0) 62%),
+    var(--accent);
   opacity: 0;
-  transition: opacity 0.35s ease;
+  transition: opacity 0.3s ease;
+}
+
+/* Thin accent edge so each card is identifiable at rest, not only on hover. */
+.card::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--accent);
+  opacity: 0.75;
 }
 
 .card:hover,
 .card:focus-visible {
-  transform: translateY(-4px);
-  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.35);
+  transform: translateY(-3px);
+  border-color: var(--border-hi);
+  box-shadow: 0 14px 30px rgba(0, 0, 0, 0.4);
 }
 
 .card:hover::before,
 .card:focus-visible::before {
-  opacity: 0.9;
+  opacity: 1;
+}
+
+/* "Coming soon" cards aren't clickable, so they shouldn't pretend to be:
+   no lift, no accent wash, no text flip. Only the badge responds. */
+.card--soon:hover,
+.card--soon:focus-visible {
+  transform: none;
+  box-shadow: none;
+  border-color: var(--border);
+}
+
+.card--soon:hover::before,
+.card--soon:focus-visible::before {
+  opacity: 0;
+}
+
+.card--soon:hover .card-title,
+.card--soon:hover .card-desc {
+  color: inherit;
+}
+
+.card--soon:hover .card-desc {
+  color: var(--text-dim);
+}
+
+.card--soon:hover .card-icon {
+  color: var(--text-faint);
+  opacity: 0.35;
 }
 
 .card:focus-visible {
   outline: 2px solid var(--accent);
-  outline-offset: 4px;
+  outline-offset: 3px;
 }
 
 .card-icon {
   position: absolute;
-  top: -12px;
-  right: -12px;
-  width: 120px;
-  height: 120px;
-  color: var(--icon-default);
-  opacity: 0.4;
+  top: -10px;
+  right: -10px;
+  width: 112px;
+  height: 112px;
+  color: var(--text-faint);
+  opacity: 0.35;
   z-index: 0;
   pointer-events: none;
-  transition: color 0.3s ease, opacity 0.3s ease;
+  transition: color 0.28s ease, opacity 0.28s ease;
 }
 
 .card-icon svg {
@@ -150,8 +443,8 @@ body {
 
 .card:hover .card-icon,
 .card:focus-visible .card-icon {
-  color: var(--icon-hover);
-  opacity: 0.6;
+  color: var(--text-on-accent);
+  opacity: 0.55;
 }
 
 .card-body {
@@ -163,15 +456,15 @@ body {
 }
 
 .card-title {
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 600;
-  transition: color 0.3s ease;
+  transition: color 0.28s ease;
 }
 
 .card-desc {
-  font-size: 0.9rem;
+  font-size: 0.89rem;
   color: var(--text-dim);
-  transition: color 0.3s ease;
+  transition: color 0.28s ease;
 }
 
 .card:hover .card-title,
@@ -183,12 +476,12 @@ body {
 
 .card-link-indicator {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
+  top: 1.2rem;
+  right: 1.2rem;
   z-index: 1;
-  font-size: 1.2rem;
-  color: var(--text-dim);
-  transition: color 0.3s ease, transform 0.3s ease;
+  font-size: 1.15rem;
+  color: var(--text-faint);
+  transition: color 0.28s ease, transform 0.28s ease;
 }
 
 .card:hover .card-link-indicator {
@@ -198,25 +491,30 @@ body {
 
 .card-badge {
   position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
+  top: 1.2rem;
+  right: 1.2rem;
   z-index: 1;
-  font-size: 0.7rem;
+  font-size: 0.68rem;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  background: rgba(0, 0, 0, 0.25);
-  padding: 0.25rem 0.6rem;
+  background: rgba(0, 0, 0, 0.28);
+  border: 1px solid var(--border-hi);
+  padding: 0.2rem 0.55rem;
   border-radius: 999px;
   color: var(--text-dim);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  transition: background-color 0.28s ease, color 0.28s ease;
 }
 
 .card--soon:hover .card-badge {
-  background: rgba(255, 255, 255, 0.35);
-  color: var(--text-on-accent);
+  border-color: var(--accent);
+  color: var(--text);
 }
 
-/* Small uppercase category pill — used on writing, stories, and prompting pages. */
+/* ============================================================================
+   Shared bits
+   ========================================================================= */
+
+/* Small uppercase category pill — writing, stories, and prompting pages. */
 .tag-pill {
   display: inline-block;
   font-size: 0.7rem;
@@ -224,15 +522,102 @@ body {
   letter-spacing: 0.08em;
   color: var(--text-dim);
   background: rgba(0, 0, 0, 0.25);
+  border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 0.25rem 0.6rem;
+  padding: 0.22rem 0.6rem;
 }
 
 .site-footer {
-  text-align: center;
-  padding: 2rem 1rem 3rem;
-  color: var(--text-dim);
-  font-size: 0.85rem;
+  padding: 2rem 2.5rem 2.5rem;
+  border-top: 1px solid var(--border);
+  color: var(--text-faint);
+  font-size: 0.82rem;
+}
+
+.site-footer p {
+  margin: 0;
+}
+
+/* ============================================================================
+   Responsive: sidebar becomes a top bar with a collapsible drawer
+   ========================================================================= */
+
+@media (max-width: 900px) {
+  .site-shell {
+    grid-template-columns: 1fr;
+  }
+
+  .site-sidebar {
+    /* Stays pinned to the top so the menu is always reachable, but sized to
+       its content rather than 100vh. */
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    height: auto;
+    max-height: 100vh;
+    overflow-y: auto;
+    background: var(--bg-sidebar);
+    padding: 0.85rem 1.25rem;
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.75rem;
+  }
+
+  .nav-brand {
+    padding: 0;
+    flex: 1;
+  }
+
+  .nav-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-hi);
+    border-radius: var(--radius-sm);
+    color: var(--text-dim);
+    padding: 0.45rem 0.8rem;
+    font-size: 0.85rem;
+    cursor: pointer;
+  }
+
+  .nav-toggle-bars {
+    position: relative;
+    width: 15px;
+    height: 2px;
+    background: currentColor;
+    box-shadow: 0 5px 0 currentColor, 0 -5px 0 currentColor;
+  }
+
+  .site-sidebar .nav-tree {
+    display: none;
+    flex-basis: 100%;
+  }
+
+  .site-sidebar.is-open .nav-tree {
+    display: block;
+    padding-top: 0.5rem;
+  }
+
+  .site-header,
+  .home-header {
+    padding: 2.5rem 1.5rem 1.75rem;
+  }
+
+  .home-header .site-title {
+    font-size: 2.2rem;
+  }
+
+  .card-grid {
+    padding: 1.75rem 1.5rem 3rem;
+  }
+
+  .site-footer {
+    padding: 1.5rem 1.5rem 2rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -242,7 +627,9 @@ body {
   .card-title,
   .card-desc,
   .card-link-indicator,
-  .card-badge {
+  .card-badge,
+  .nav-link,
+  .back-link {
     transition: none;
   }
 }

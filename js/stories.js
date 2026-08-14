@@ -75,6 +75,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "tag-filter-btn" + (isActive ? " is-active" : "");
+    // aria-pressed carries the state for assistive tech; .is-active is only
+    // the visual half of it.
+    btn.setAttribute("aria-pressed", String(isActive));
     btn.textContent = label;
     btn.dataset.tag = slug;
     return btn;
@@ -91,15 +94,29 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    filterBar
-      .querySelectorAll(".tag-filter-btn")
-      .forEach((b) => b.classList.remove("is-active"));
+    filterBar.querySelectorAll(".tag-filter-btn").forEach((b) => {
+      b.classList.remove("is-active");
+      b.setAttribute("aria-pressed", "false");
+    });
     btn.classList.add("is-active");
+    btn.setAttribute("aria-pressed", "true");
 
     const selected = btn.dataset.tag;
+    let shown = 0;
     listEl.querySelectorAll(".story-entry").forEach((entry) => {
       const tags = (entry.dataset.tags || "").split(",");
-      entry.style.display = selected === "all" || tags.includes(selected) ? "" : "none";
+      const match = selected === "all" || tags.includes(selected);
+      entry.style.display = match ? "" : "none";
+      if (match) {
+        shown += 1;
+      }
     });
+
+    // Otherwise a filter that matches nothing just leaves a blank page.
+    if (emptyState) {
+      emptyState.hidden = shown > 0;
+      emptyState.textContent =
+        shown > 0 ? "" : "Nothing in that category yet — try another filter.";
+    }
   });
 });

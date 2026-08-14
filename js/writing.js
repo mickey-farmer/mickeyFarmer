@@ -25,6 +25,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const btn = document.createElement("button");
     btn.type = "button";
     btn.className = "tag-filter-btn" + (isActive ? " is-active" : "");
+    // aria-pressed carries the state for assistive tech; .is-active is only
+    // the visual half of it.
+    btn.setAttribute("aria-pressed", String(isActive));
     btn.textContent = label;
     btn.dataset.tag = slug;
     return btn;
@@ -41,10 +44,12 @@ document.addEventListener("DOMContentLoaded", () => {
       return;
     }
 
-    filterBar
-      .querySelectorAll(".tag-filter-btn")
-      .forEach((b) => b.classList.remove("is-active"));
+    filterBar.querySelectorAll(".tag-filter-btn").forEach((b) => {
+      b.classList.remove("is-active");
+      b.setAttribute("aria-pressed", "false");
+    });
     btn.classList.add("is-active");
+    btn.setAttribute("aria-pressed", "true");
 
     const selected = btn.dataset.tag;
     entries.forEach((entry) => {

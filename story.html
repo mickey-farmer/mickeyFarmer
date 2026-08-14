@@ -4,28 +4,41 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title id="pageTitle">Story — Mickey Farmer</title>
+  <meta name="description" content="An original short story or script by Mickey Farmer." />
   <link rel="stylesheet" href="css/styles.css" />
-  <link rel="stylesheet" href="css/writing.css" />
   <link rel="stylesheet" href="css/stories.css" />
 </head>
-<body>
+<body data-page="story" data-theme="stories">
 
-  <header class="site-header story-header">
-    <a class="back-link" href="stories.html">&larr; Back to Stories</a>
-  </header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main class="story-page">
-    <div id="storyMeta" class="story-meta"></div>
-    <article id="storyContent" class="story-content">
-      <p>Loading…</p>
-    </article>
-  </main>
+  <div class="site-shell">
 
-  <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Mickey Farmer</p>
-  </footer>
+    <!-- Sidebar is rendered by js/nav.js from the SITE array in that file. -->
+    <div class="site-sidebar" id="siteNav"></div>
 
-  <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <div class="site-body">
+
+      <main class="site-content story-page" id="main">
+        <a class="back-link" href="stories.html">&larr; All stories</a>
+        <div id="storyMeta" class="story-meta"></div>
+        <article id="storyContent" class="story-content">
+          <p>Loading…</p>
+        </article>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Mickey Farmer</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <!-- Pinned to a major version on purpose: unpinned "marked" resolves to
+       latest, so a future breaking release would silently turn every story into
+       the generic "couldn't load" message. -->
+  <script src="https://cdn.jsdelivr.net/npm/marked@12/marked.min.js"></script>
+  <script src="js/nav.js"></script>
   <script src="js/script.js"></script>
   <script src="js/stories-data.js"></script>
   <script src="js/story.js"></script>

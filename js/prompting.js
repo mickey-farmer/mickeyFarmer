@@ -1,43 +1,37 @@
-// Prompt Engineering page: left-nav section switching (hash-routed), lazy PDF
-// embed, and copy-to-clipboard on the prompt blocks.
+// Prompt Engineering page: shows one section at a time based on the URL hash,
+// lazy-loads the certificate PDF, and wires up the copy buttons.
 //
-// Adding a new section = add a .docs-nav-link with data-section="foo" and a
-// matching <section class="docs-section" data-section="foo" id="foo">.
-// Adding a new prompt card = copy an <article class="prompt-card"> block; the
-// copy buttons below wire themselves up to any .prompt-block on the page.
+// The nav itself is the global sidebar — see js/nav.js, where Certification and
+// Portfolio are declared as children of Prompt Engineering. This file only
+// reacts to the hash, so adding a section means adding it to SITE in nav.js
+// plus a matching <section class="docs-section" data-section="..."> here.
 
 document.addEventListener("DOMContentLoaded", () => {
   /* ---------- Section switching ---------- */
 
-  const links = Array.from(document.querySelectorAll(".docs-nav-link"));
   const sections = Array.from(document.querySelectorAll(".docs-section"));
 
-  // Hand the one-section-at-a-time behavior over to CSS. Without this class the
-  // page renders every section stacked, so a JS failure degrades gracefully.
-  if (links.length > 0 && sections.length > 0) {
+  if (sections.length > 0) {
+    // Hand the one-at-a-time behavior to CSS. Without this class every section
+    // renders stacked, so a JS failure degrades to a readable page.
     document.body.classList.add("js-docs");
   }
 
   const showSection = (name, { focus = false } = {}) => {
-    const match = sections.some((s) => s.dataset.section === name);
-    const target = match ? name : sections[0] && sections[0].dataset.section;
-    if (!target) {
+    if (sections.length === 0) {
       return;
     }
+    const known = sections.some((s) => s.dataset.section === name);
+    const target = known ? name : sections[0].dataset.section;
 
     sections.forEach((section) => {
       section.classList.toggle("is-active", section.dataset.section === target);
     });
-    links.forEach((link) => {
-      const isActive = link.dataset.section === target;
-      link.classList.toggle("is-active", isActive);
-      if (isActive) {
-        link.setAttribute("aria-current", "page");
-      } else {
-        link.removeAttribute("aria-current");
-      }
-    });
 
+    // On a deliberate section change, move focus to the new section so screen
+    // reader and keyboard users land in the content that just appeared. (That's
+    // what the tabindex="-1" on each section is for.) Skipped on first paint so
+    // we don't steal focus from the top of the page.
     if (focus) {
       const active = sections.find((s) => s.dataset.section === target);
       if (active) {
@@ -46,28 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   };
 
-  links.forEach((link) => {
-    link.addEventListener("click", (event) => {
-      event.preventDefault();
-      const name = link.dataset.section;
-      // Keep the hash in sync so the section is linkable/bookmarkable, but
-      // don't let the browser jump-scroll to the anchor.
-      if (window.location.hash.slice(1) !== name) {
-        history.pushState(null, "", "#" + name);
-      }
-      showSection(name, { focus: true });
-    });
-  });
-
   window.addEventListener("hashchange", () => {
-    showSection(window.location.hash.slice(1));
+    showSection(window.location.hash.slice(1), { focus: true });
   });
 
   showSection(window.location.hash.slice(1));
 
   /* ---------- Lazy-load the certificate PDF ---------- */
-  // The PDF is ~2MB, so it only gets fetched the first time someone actually
-  // expands the certificate.
+  // The PDF is ~2MB, so it's only fetched the first time someone expands it.
 
   document.querySelectorAll(".cert").forEach((cert) => {
     const label = cert.querySelector(".cert-toggle-text");

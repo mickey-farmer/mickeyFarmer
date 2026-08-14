@@ -1,7 +1,10 @@
+/* Shared list/entry styling for writing.html and stories.html.
+   Accent colors come from var(--accent), which each page sets via
+   <body data-theme="..."> — so this file works for both pages unchanged. */
+
 .writing-page {
-  max-width: 760px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4.5rem;
+  max-width: var(--content-max);
+  padding: 2.5rem 2.5rem 4rem;
 }
 
 .tag-filter {
@@ -14,45 +17,48 @@
 .tag-filter-btn {
   background: var(--card-bg);
   color: var(--text-dim);
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 999px;
-  padding: 0.45rem 1rem;
+  padding: 0.42rem 1rem;
   font-size: 0.85rem;
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
 .tag-filter-btn:hover {
   color: var(--text);
+  border-color: var(--border-hi);
 }
 
 .tag-filter-btn.is-active {
-  background: var(--accent-writing);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--text-on-accent);
 }
 
 .writing-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
 }
 
 .writing-entry {
   background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
   border-radius: var(--radius);
-  padding: 1.75rem 2rem;
-  border-left: 3px solid var(--accent-writing);
+  padding: 1.6rem 1.85rem;
 }
 
 .writing-entry-tags {
   margin-bottom: 0.6rem;
 }
 
-/* .tag-pill now lives in css/styles.css so every page can use it. */
+/* .tag-pill lives in css/styles.css so every page can use it. */
 
 .writing-entry-title {
   margin: 0 0 0.6rem;
-  font-size: 1.3rem;
+  font-size: 1.25rem;
 }
 
 .writing-entry-title a {
@@ -73,11 +79,23 @@
 .writing-entry-link {
   display: inline-block;
   font-size: 0.9rem;
-  color: var(--accent-writing);
+  color: var(--accent);
   text-decoration: none;
 }
 
 .writing-entry-link:hover,
 .writing-entry-link:focus-visible {
   text-decoration: underline;
+}
+
+@media (max-width: 900px) {
+  .writing-page {
+    padding: 1.75rem 1.5rem 3rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .tag-filter-btn {
+    transition: none;
+  }
 }

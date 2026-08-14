@@ -1,72 +1,13 @@
-/* Prompt Engineering — documentation-style layout: fixed left nav + content pane.
-   Colors and card surfaces all come from css/styles.css. */
+/* Prompt Engineering page: certificate card + prompt portfolio cards.
+   The left-hand nav is now the global sidebar (css/styles.css + js/nav.js);
+   this file only styles the content pane. Accent comes from var(--accent). */
 
-:root {
-  --accent-prompt: var(--accent-prompting);
+.docs-page {
+  max-width: var(--content-max);
+  padding: 2.5rem 2.5rem 4rem;
 }
 
-/* ---------- Layout ---------- */
-
-.docs-layout {
-  display: grid;
-  grid-template-columns: 220px minmax(0, 1fr);
-  gap: 2.5rem;
-  max-width: 1060px;
-  margin: 0 auto;
-  padding: 2.5rem 1.5rem 4.5rem;
-  align-items: start;
-}
-
-.docs-sidebar {
-  position: sticky;
-  top: 2rem;
-}
-
-.docs-nav-label {
-  margin: 0 0 0.75rem;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  color: var(--text-dim);
-}
-
-.docs-nav-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
-}
-
-.docs-nav-link {
-  display: block;
-  padding: 0.5rem 0.9rem;
-  margin-left: -1px;
-  border-left: 2px solid transparent;
-  color: var(--text-dim);
-  text-decoration: none;
-  font-size: 0.95rem;
-  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
-}
-
-.docs-nav-link:hover,
-.docs-nav-link:focus-visible {
-  color: var(--text);
-  background: rgba(255, 255, 255, 0.05);
-}
-
-.docs-nav-link.is-active {
-  color: var(--accent-prompt);
-  border-left-color: var(--accent-prompt);
-  font-weight: 600;
-}
-
-/* ---------- Content pane ---------- */
-
-.docs-content {
-  min-width: 0;
-}
-
-/* Sections are only hidden once JS takes over the nav, so the page still shows
+/* Sections are only hidden once JS takes over, so the page still shows
    everything (stacked) if the script fails to load. */
 .js-docs .docs-section {
   display: none;
@@ -90,7 +31,7 @@
 
 .docs-section-title {
   margin: 0 0 0.5rem;
-  font-size: 1.75rem;
+  font-size: 1.6rem;
 }
 
 .docs-section-intro {
@@ -103,10 +44,11 @@
 
 .cert {
   background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
   border-radius: var(--radius);
-  border-left: 3px solid var(--accent-prompt);
   overflow: hidden;
-  margin-bottom: 1.25rem;
+  margin-bottom: 1.15rem;
 }
 
 .cert-summary {
@@ -115,7 +57,7 @@
   justify-content: space-between;
   gap: 1rem;
   flex-wrap: wrap;
-  padding: 1.4rem 1.75rem;
+  padding: 1.35rem 1.75rem;
   cursor: pointer;
   list-style: none;
 }
@@ -126,7 +68,7 @@
 
 .cert-summary:hover,
 .cert-summary:focus-visible {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg-hi);
 }
 
 .cert-heading {
@@ -136,12 +78,12 @@
 }
 
 .cert-name {
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 600;
 }
 
 .cert-meta {
-  font-size: 0.88rem;
+  font-size: 0.87rem;
   color: var(--text-dim);
 }
 
@@ -150,7 +92,7 @@
   align-items: center;
   gap: 0.4rem;
   font-size: 0.85rem;
-  color: var(--accent-prompt);
+  color: var(--accent);
   white-space: nowrap;
 }
 
@@ -167,7 +109,7 @@
 
 .cert-body {
   padding: 0 1.75rem 1.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border);
 }
 
 .cert-facts {
@@ -184,18 +126,18 @@
 }
 
 .cert-fact-label {
-  font-size: 0.68rem;
+  font-size: 0.67rem;
   text-transform: uppercase;
   letter-spacing: 0.09em;
-  color: var(--text-dim);
+  color: var(--text-faint);
 }
 
 .cert-fact-value {
-  font-size: 0.92rem;
+  font-size: 0.91rem;
 }
 
 .cert-fact-value a {
-  color: var(--accent-prompt);
+  color: var(--accent);
   text-decoration: none;
 }
 
@@ -205,8 +147,8 @@
 }
 
 .cert-pdf {
-  background: rgba(0, 0, 0, 0.22);
-  border-radius: 10px;
+  background: var(--code-bg);
+  border-radius: var(--radius-sm);
   padding: 0.75rem;
 }
 
@@ -218,18 +160,18 @@
   min-height: 260px;
   border: 0;
   border-radius: 6px;
-  background: #2f2f34;
+  background: #1a1e24;
 }
 
 .cert-pdf-fallback {
   margin: 0.75rem 0 0.15rem;
-  font-size: 0.82rem;
+  font-size: 0.81rem;
   color: var(--text-dim);
   text-align: center;
 }
 
 .cert-pdf-fallback a {
-  color: var(--accent-prompt);
+  color: var(--accent);
 }
 
 .cert-download {
@@ -237,7 +179,7 @@
   margin-top: 1.25rem;
   padding: 0.55rem 1.1rem;
   border-radius: 999px;
-  background: var(--accent-prompt);
+  background: var(--accent);
   color: var(--text-on-accent);
   font-size: 0.85rem;
   font-weight: 600;
@@ -255,13 +197,14 @@
 .prompt-list {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
 }
 
 .prompt-card {
   background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--accent);
   border-radius: var(--radius);
-  border-left: 3px solid var(--accent-prompt);
   overflow: hidden;
 }
 
@@ -270,7 +213,7 @@
   align-items: flex-start;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.4rem 1.75rem;
+  padding: 1.35rem 1.75rem;
   cursor: pointer;
   list-style: none;
 }
@@ -281,7 +224,7 @@
 
 .prompt-summary:hover,
 .prompt-summary:focus-visible {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--card-bg-hi);
 }
 
 .prompt-summary-main {
@@ -292,29 +235,29 @@
 }
 
 .prompt-title {
-  font-size: 1.15rem;
+  font-size: 1.12rem;
   font-weight: 600;
 }
 
 .prompt-teaser {
-  font-size: 0.9rem;
+  font-size: 0.89rem;
   color: var(--text-dim);
 }
 
 .prompt-chevron {
-  color: var(--text-dim);
+  color: var(--text-faint);
   flex-shrink: 0;
 }
 
 .prompt-body {
   padding: 0 1.75rem 1.75rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border);
 }
 
 .prompt-context {
   margin: 1.25rem 0 1.75rem;
   color: var(--text-dim);
-  font-size: 0.92rem;
+  font-size: 0.91rem;
 }
 
 .prompt-stage {
@@ -327,12 +270,12 @@
   align-items: center;
   gap: 0.6rem;
   margin: 0 0 0.7rem;
-  font-size: 0.95rem;
+  font-size: 0.94rem;
   font-weight: 600;
 }
 
 .prompt-stage-badge {
-  font-size: 0.66rem;
+  font-size: 0.65rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
@@ -343,19 +286,20 @@
 }
 
 .prompt-stage-badge--v1 {
-  border: 1px solid rgba(255, 255, 255, 0.18);
+  border: 1px solid var(--border-hi);
 }
 
 .prompt-stage-badge--final {
-  background: var(--accent-prompt);
+  background: var(--accent);
   color: var(--text-on-accent);
 }
 
 /* Code block with copy button */
 .prompt-block {
   position: relative;
-  background: rgba(0, 0, 0, 0.28);
-  border-radius: 10px;
+  background: var(--code-bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
 }
 
 .prompt-block pre {
@@ -368,7 +312,7 @@
 
 .prompt-block code {
   font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
-  font-size: 0.83rem;
+  font-size: 0.82rem;
   line-height: 1.6;
   white-space: pre-wrap;
   word-break: break-word;
@@ -380,12 +324,12 @@
   top: 0.6rem;
   right: 0.6rem;
   z-index: 1;
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.1);
   color: var(--text-dim);
-  border: none;
+  border: 1px solid var(--border);
   border-radius: 6px;
-  padding: 0.3rem 0.6rem;
-  font-size: 0.72rem;
+  padding: 0.28rem 0.6rem;
+  font-size: 0.71rem;
   letter-spacing: 0.04em;
   text-transform: uppercase;
   cursor: pointer;
@@ -394,12 +338,13 @@
 
 .prompt-copy:hover,
 .prompt-copy:focus-visible {
-  background: rgba(255, 255, 255, 0.24);
+  background: rgba(255, 255, 255, 0.2);
   color: var(--text);
 }
 
 .prompt-copy.is-copied {
-  background: var(--accent-prompt);
+  background: var(--accent);
+  border-color: var(--accent);
   color: var(--text-on-accent);
 }
 
@@ -407,9 +352,9 @@
   margin: 0.9rem 0 0;
   padding: 0.8rem 1rem;
   border-left: 2px solid var(--accent-acting);
-  background: rgba(0, 0, 0, 0.15);
-  border-radius: 0 8px 8px 0;
-  font-size: 0.9rem;
+  background: rgba(0, 0, 0, 0.18);
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.89rem;
   color: var(--text-dim);
 }
 
@@ -419,46 +364,18 @@
 
 .prompt-eval {
   padding-top: 1.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  border-top: 1px solid var(--border);
 }
 
 .prompt-eval p {
   margin: 0;
-  font-size: 0.92rem;
+  font-size: 0.91rem;
   color: var(--text-dim);
 }
 
-/* ---------- Small screens: nav becomes a horizontal tab strip ---------- */
-
-@media (max-width: 720px) {
-  .docs-layout {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-    padding-top: 1.75rem;
-  }
-
-  .docs-sidebar {
-    position: static;
-  }
-
-  .docs-nav-list {
-    display: flex;
-    gap: 0.5rem;
-    border-left: none;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
-  }
-
-  .docs-nav-link {
-    margin-left: 0;
-    margin-bottom: -1px;
-    border-left: none;
-    border-bottom: 2px solid transparent;
-    padding: 0.5rem 0.75rem;
-  }
-
-  .docs-nav-link.is-active {
-    border-left-color: transparent;
-    border-bottom-color: var(--accent-prompt);
+@media (max-width: 900px) {
+  .docs-page {
+    padding: 1.75rem 1.5rem 3rem;
   }
 
   .cert-summary,
@@ -478,7 +395,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .docs-nav-link,
   .cert-chevron,
   .prompt-chevron,
   .prompt-copy,

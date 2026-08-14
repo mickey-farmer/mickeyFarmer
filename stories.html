@@ -9,28 +9,41 @@
   <link rel="stylesheet" href="css/writing.css" />
   <link rel="stylesheet" href="css/stories.css" />
 </head>
-<body>
+<body data-page="stories" data-theme="stories">
 
-  <header class="site-header">
-    <a class="back-link" href="gamedev.html">&larr; Back</a>
-    <h1 class="site-title">Short Stories &amp; Scripts</h1>
-    <p class="site-subtitle">Original work that doesn't live anywhere else — read it here.</p>
-  </header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main class="writing-page">
+  <div class="site-shell">
 
-    <div class="tag-filter" id="tagFilter" role="group" aria-label="Filter by category"></div>
+    <!-- Sidebar is rendered by js/nav.js from the SITE array in that file. -->
+    <div class="site-sidebar" id="siteNav"></div>
 
-    <p id="emptyState" class="empty-state" hidden>No stories posted yet — check back soon.</p>
+    <div class="site-body">
 
-    <div class="writing-list" id="storyList"></div>
+      <header class="site-header">
+        <span class="site-eyebrow">Game &amp; Story Development</span>
+        <h1 class="site-title">Short Stories &amp; Scripts</h1>
+        <p class="site-subtitle">Original work that doesn't live anywhere else — read it here.</p>
+      </header>
 
-  </main>
+      <main class="site-content writing-page" id="main">
 
-  <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Mickey Farmer</p>
-  </footer>
+        <div class="tag-filter" id="tagFilter" role="group" aria-label="Filter by category"></div>
 
+        <p id="emptyState" class="empty-state" hidden>No stories posted yet — check back soon.</p>
+
+        <div class="writing-list" id="storyList"></div>
+
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Mickey Farmer</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="js/nav.js"></script>
   <script src="js/script.js"></script>
   <script src="js/stories-data.js"></script>
   <script src="js/stories.js"></script>

@@ -7,55 +7,70 @@
   <meta name="description" content="Games, short stories, and scripts from Mickey Farmer." />
   <link rel="stylesheet" href="css/styles.css" />
 </head>
-<body>
+<body data-page="gamedev" data-theme="gamedev">
 
-  <header class="site-header">
-    <a class="back-link" href="index.html">&larr; Back</a>
-    <h1 class="site-title">Game &amp; Story Development</h1>
-    <p class="site-subtitle">Two tracks: games, and the short stories &amp; scripts that don't live anywhere else.</p>
-  </header>
+  <a class="skip-link" href="#main">Skip to content</a>
 
-  <main class="card-grid card-grid--sub">
+  <div class="site-shell">
 
-    <!-- Games -->
-    <div class="card card--soon" style="--accent: var(--accent-games);">
-      <span class="card-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M7 9L17 9L20 11L20 15L17 17L7 17L4 15L4 11Z" />
-          <path d="M7 12L7 15" />
-          <path d="M5.5 13.5L8.5 13.5" />
-          <circle cx="15" cy="12" r="0.9" fill="currentColor" stroke="none" />
-          <circle cx="17" cy="14" r="0.9" fill="currentColor" stroke="none" />
-        </svg>
-      </span>
-      <span class="card-body">
-        <span class="card-title">Games</span>
-        <span class="card-desc">Coming soon</span>
-      </span>
-      <span class="card-badge">Soon</span>
+    <!-- Sidebar is rendered by js/nav.js from the SITE array in that file. -->
+    <div class="site-sidebar" id="siteNav"></div>
+
+    <div class="site-body">
+
+      <header class="site-header">
+        <span class="site-eyebrow">Game &amp; Story Development</span>
+        <h1 class="site-title">Games, Stories &amp; Scripts</h1>
+        <p class="site-subtitle">Two tracks: games, and the short stories &amp; scripts that don't live anywhere else.</p>
+      </header>
+
+      <main class="site-content" id="main">
+        <div class="card-grid card-grid--sub">
+
+          <!-- Games -->
+          <div class="card card--soon" style="--accent: var(--accent-gamedev);">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M7 9L17 9L20 11L20 15L17 17L7 17L4 15L4 11Z" />
+                <path d="M7 12L7 15" />
+                <path d="M5.5 13.5L8.5 13.5" />
+                <circle cx="15" cy="12" r="0.9" fill="currentColor" stroke="none" />
+                <circle cx="17" cy="14" r="0.9" fill="currentColor" stroke="none" />
+              </svg>
+            </span>
+            <span class="card-body">
+              <span class="card-title">Games</span>
+              <span class="card-desc">Coming soon</span>
+            </span>
+            <span class="card-badge">Soon</span>
+          </div>
+
+          <!-- Short Stories & Scripts -->
+          <a class="card" href="stories.html" style="--accent: var(--accent-stories);">
+            <span class="card-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M2 5L11 7L11 19L2 17Z" />
+                <path d="M22 5L13 7L13 19L22 17Z" />
+              </svg>
+            </span>
+            <span class="card-body">
+              <span class="card-title">Short Stories &amp; Scripts</span>
+              <span class="card-desc">Read them here — nowhere else they're hosted</span>
+            </span>
+            <span class="card-link-indicator" aria-hidden="true">&rarr;</span>
+          </a>
+
+        </div>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Mickey Farmer</p>
+      </footer>
+
     </div>
+  </div>
 
-    <!-- Short Stories & Scripts -->
-    <a class="card" href="stories.html" style="--accent: var(--accent-stories);">
-      <span class="card-icon" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M2 5L11 7L11 19L2 17Z" />
-          <path d="M22 5L13 7L13 19L22 17Z" />
-        </svg>
-      </span>
-      <span class="card-body">
-        <span class="card-title">Short Stories &amp; Scripts</span>
-        <span class="card-desc">Read them here — nowhere else they're hosted</span>
-      </span>
-      <span class="card-link-indicator" aria-hidden="true">&rarr;</span>
-    </a>
-
-  </main>
-
-  <footer class="site-footer">
-    <p>&copy; <span id="year"></span> Mickey Farmer</p>
-  </footer>
-
+  <script src="js/nav.js"></script>
   <script src="js/script.js"></script>
 </body>
 </html>
