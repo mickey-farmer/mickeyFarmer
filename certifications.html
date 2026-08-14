@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Certifications — Mickey Farmer</title>
+  <meta name="description" content="Certifications held by Mickey Farmer — technical writing, API documentation, prompt engineering, engineering, project management, and game design." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/certificates.css" />
+</head>
+<body data-page="certifications" data-theme="certifications">
+
+  <a class="skip-link" href="#main">Skip to content</a>
+
+  <div class="site-shell">
+
+    <!-- Sidebar is rendered by js/nav.js from the SITE array in that file. -->
+    <div class="site-sidebar" id="siteNav"></div>
+
+    <div class="site-body">
+
+      <header class="site-header">
+        <span class="site-eyebrow">Certifications</span>
+        <h1 class="site-title">Coursework &amp; Credentials</h1>
+        <p class="site-subtitle">
+          Grouped by area, newest first. Expand any one to read the certificate itself.
+          <span id="certTotal" class="cert-total"></span>
+        </p>
+      </header>
+
+      <!-- Everything below is rendered from js/certs-data.js — add certificates
+           there, not here. -->
+      <main class="site-content certs-page" id="main">
+        <div id="certGroups"></div>
+        <p id="certEmpty" class="empty-state" hidden>No certificates listed yet.</p>
+      </main>
+
+      <footer class="site-footer">
+        <p>&copy; <span id="year"></span> Mickey Farmer</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <script src="js/nav.js"></script>
+  <script src="js/script.js"></script>
+  <script src="js/certs-data.js"></script>
+  <script src="js/certifications.js"></script>
+</body>
+</html>

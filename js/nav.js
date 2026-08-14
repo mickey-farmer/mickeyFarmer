@@ -32,6 +32,22 @@ const SITE = [
     theme: "writing",
   },
   {
+    // Sub-items are in-page anchors to each category group on the one page;
+    // the group ids come from js/certs-data.js.
+    label: "Certifications",
+    href: "certifications.html",
+    page: "certifications",
+    theme: "certifications",
+    children: [
+      { label: "Technical Writing", href: "certifications.html#technical-writing", page: "certifications", hash: "technical-writing" },
+      { label: "API Documentation", href: "certifications.html#api-documentation", page: "certifications", hash: "api-documentation" },
+      { label: "Prompt Engineering", href: "certifications.html#prompt-engineering", page: "certifications", hash: "prompt-engineering" },
+      { label: "Engineering", href: "certifications.html#engineering", page: "certifications", hash: "engineering" },
+      { label: "Project Management", href: "certifications.html#project-management", page: "certifications", hash: "project-management" },
+      { label: "Game Design", href: "certifications.html#game-design", page: "certifications", hash: "game-design" },
+    ],
+  },
+  {
     label: "Prompt Engineering",
     href: "prompting.html",
     page: "prompting",

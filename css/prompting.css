@@ -41,155 +41,17 @@
 }
 
 /* ---------- Certification ---------- */
+/* The .cert* component lives in css/certificates.css, shared with
+   certifications.html. prompting.html loads both stylesheets.
+   Only the prompt-chevron half of the old shared chevron rule stays here. */
 
-.cert {
-  background: var(--card-bg);
-  border: 1px solid var(--border);
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius);
-  overflow: hidden;
-  margin-bottom: 1.15rem;
-}
-
-.cert-summary {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 1rem;
-  flex-wrap: wrap;
-  padding: 1.35rem 1.75rem;
-  cursor: pointer;
-  list-style: none;
-}
-
-.cert-summary::-webkit-details-marker {
-  display: none;
-}
-
-.cert-summary:hover,
-.cert-summary:focus-visible {
-  background: var(--card-bg-hi);
-}
-
-.cert-heading {
-  display: flex;
-  flex-direction: column;
-  gap: 0.2rem;
-}
-
-.cert-name {
-  font-size: 1.12rem;
-  font-weight: 600;
-}
-
-.cert-meta {
-  font-size: 0.87rem;
-  color: var(--text-dim);
-}
-
-.cert-toggle {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4rem;
-  font-size: 0.85rem;
-  color: var(--accent);
-  white-space: nowrap;
-}
-
-.cert-chevron,
 .prompt-chevron {
   display: inline-block;
   transition: transform 0.2s ease;
 }
 
-.cert[open] .cert-chevron,
 .prompt-details[open] .prompt-chevron {
   transform: rotate(180deg);
-}
-
-.cert-body {
-  padding: 0 1.75rem 1.75rem;
-  border-top: 1px solid var(--border);
-}
-
-.cert-facts {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 1.5rem;
-  padding: 1.25rem 0;
-}
-
-.cert-fact {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-}
-
-.cert-fact-label {
-  font-size: 0.67rem;
-  text-transform: uppercase;
-  letter-spacing: 0.09em;
-  color: var(--text-faint);
-}
-
-.cert-fact-value {
-  font-size: 0.91rem;
-}
-
-.cert-fact-value a {
-  color: var(--accent);
-  text-decoration: none;
-}
-
-.cert-fact-value a:hover,
-.cert-fact-value a:focus-visible {
-  text-decoration: underline;
-}
-
-.cert-pdf {
-  background: var(--code-bg);
-  border-radius: var(--radius-sm);
-  padding: 0.75rem;
-}
-
-/* The certificate is landscape (792x612), so hold that aspect ratio. */
-.cert-pdf-frame {
-  display: block;
-  width: 100%;
-  aspect-ratio: 792 / 612;
-  min-height: 260px;
-  border: 0;
-  border-radius: 6px;
-  background: #1a1e24;
-}
-
-.cert-pdf-fallback {
-  margin: 0.75rem 0 0.15rem;
-  font-size: 0.81rem;
-  color: var(--text-dim);
-  text-align: center;
-}
-
-.cert-pdf-fallback a {
-  color: var(--accent);
-}
-
-.cert-download {
-  display: inline-block;
-  margin-top: 1.25rem;
-  padding: 0.55rem 1.1rem;
-  border-radius: 999px;
-  background: var(--accent);
-  color: var(--text-on-accent);
-  font-size: 0.85rem;
-  font-weight: 600;
-  text-decoration: none;
-  transition: filter 0.2s ease;
-}
-
-.cert-download:hover,
-.cert-download:focus-visible {
-  filter: brightness(1.1);
 }
 
 /* ---------- Portfolio ---------- */
@@ -378,12 +240,12 @@
     padding: 1.75rem 1.5rem 3rem;
   }
 
-  .cert-summary,
+  /* .cert-* responsive rules live in css/certificates.css — don't add them
+     back here, or the two files will fight over padding. */
   .prompt-summary {
     padding: 1.15rem 1.25rem;
   }
 
-  .cert-body,
   .prompt-body {
     padding: 0 1.25rem 1.5rem;
   }
@@ -395,10 +257,8 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .cert-chevron,
   .prompt-chevron,
-  .prompt-copy,
-  .cert-download {
+  .prompt-copy {
     transition: none;
   }
 }

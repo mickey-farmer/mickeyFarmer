@@ -38,6 +38,7 @@ entry with a matching `page`, and add a `body[data-theme="..."]` line in `css/st
 ```
 index.html            home — hero plus the top-level category cards
 writing.html          Technical Writing samples (links out to published docs)
+certifications.html   all certifications, grouped by area — rendered from js/certs-data.js
 prompting.html        Prompt Engineering — Certification and Portfolio sections
 gamedev.html          Game & Story Development hub — Games, Short Stories & Scripts
 stories.html          list of standalone stories/scripts (hosted only here)
@@ -46,10 +47,13 @@ stories/              story content as plain Markdown files, see stories/README.
 css/styles.css        palette, theming, app shell, sidebar, cards, .tag-pill (shared everywhere)
 css/writing.css       shared list/entry styling for writing.html and stories.html
 css/stories.css       story-specific bits (reader typography)
-css/prompting.css     certificate card + prompt portfolio cards
+css/certificates.css  the certificate component — shared by certifications.html + prompting.html
+css/prompting.css     prompt portfolio cards
 js/nav.js             THE SITE MAP — renders the sidebar on every page from one array
 js/script.js          small hook (currently just sets the footer year)
 js/writing.js         builds the tag filter on writing.html
+js/certs-data.js      manifest of certifications, grouped by area — edit this to add one
+js/certifications.js  renders certifications.html from the manifest
 js/prompting.js       hash-driven section switching, lazy PDF embed, copy buttons
 js/stories-data.js    manifest of stories (title, tag, teaser, date) — edit this to add one
 js/stories.js         renders the story list + tag filter on stories.html from the manifest
@@ -67,6 +71,7 @@ Blue-gray chrome throughout, with one accent per section so you can tell where y
 | --- | --- | --- |
 | Home | `--accent-home` | slate blue |
 | Technical Writing | `--accent-writing` | teal |
+| Certifications | `--accent-certifications` | indigo |
 | Prompt Engineering | `--accent-prompting` | green |
 | Game & Story Development | `--accent-gamedev` | violet |
 | Short Stories & Scripts | `--accent-stories` | blue |
@@ -79,6 +84,14 @@ serves both the teal Technical Writing page and the blue Stories page without a 
 
 - **Acting** lives on its own site (mickeyonstage.com), so the nav and home page can only link out to it.
 - **Technical Writing** — `writing.html`, a list of samples that link out to published docs.
+- **Certifications** — `certifications.html`. Every certificate, grouped by area, each one a
+  collapsed row that expands to the PDF. The page, the category headings, and the nav's sub-items
+  are all built from `js/certs-data.js`:
+  - Drop the PDF in `assets/certificates/`, add an entry to the right group, done. No markup to edit.
+  - A group with no certificates yet renders nothing, and `js/certifications.js` also removes that
+    category from the sidebar so the nav never points at a missing anchor.
+  - PDFs are only fetched when a row is expanded, so the page stays light as this list grows.
+  - The bottom of `certs-data.js` tracks certificates that still need their PDF copied in.
 - **Prompt Engineering** — `prompting.html`. The nav's sub-items switch sections
   (hash-routed, so `prompting.html#portfolio` is linkable):
   - **Certification** — one `<details class="cert">` block per credential. The PDF only downloads

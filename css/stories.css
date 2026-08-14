@@ -1,11 +1,7 @@
 /* Story-specific bits. Accent comes from var(--accent) — stories.html and
    story.html both use <body data-theme="stories">. */
 
-.empty-state {
-  color: var(--text-dim);
-  font-style: italic;
-  padding: 2rem 0;
-}
+/* .empty-state now lives in css/styles.css — shared with certifications.html. */
 
 .story-page {
   max-width: 680px;

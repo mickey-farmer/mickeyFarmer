@@ -44,6 +44,7 @@
   --accent-prompting: #6cc189;
   --accent-gamedev: #a68cdb;
   --accent-stories: #6ea9e0;
+  --accent-certifications: #96abe2;
   --accent-acting: #dfa25c;
   /* Used by the commented-out Dancing card in index.html. */
   --accent-dancing: #d4699e;
@@ -58,6 +59,7 @@ body[data-theme="prompting"] { --accent: var(--accent-prompting); }
 body[data-theme="gamedev"]   { --accent: var(--accent-gamedev); }
 body[data-theme="stories"]   { --accent: var(--accent-stories); }
 body[data-theme="acting"]    { --accent: var(--accent-acting); }
+body[data-theme="certifications"] { --accent: var(--accent-certifications); }
 
 * {
   box-sizing: border-box;
@@ -525,6 +527,13 @@ body {
   border: 1px solid var(--border);
   border-radius: 999px;
   padding: 0.22rem 0.6rem;
+}
+
+/* Shown when a list has nothing to render — stories and certifications. */
+.empty-state {
+  color: var(--text-dim);
+  font-style: italic;
+  padding: 2rem 0;
 }
 
 .site-footer {
