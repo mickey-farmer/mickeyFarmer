@@ -1,0 +1,488 @@
+/* Prompt Engineering — documentation-style layout: fixed left nav + content pane.
+   Colors and card surfaces all come from css/styles.css. */
+
+:root {
+  --accent-prompt: var(--accent-prompting);
+}
+
+/* ---------- Layout ---------- */
+
+.docs-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 2.5rem;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4.5rem;
+  align-items: start;
+}
+
+.docs-sidebar {
+  position: sticky;
+  top: 2rem;
+}
+
+.docs-nav-label {
+  margin: 0 0 0.75rem;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--text-dim);
+}
+
+.docs-nav-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+}
+
+.docs-nav-link {
+  display: block;
+  padding: 0.5rem 0.9rem;
+  margin-left: -1px;
+  border-left: 2px solid transparent;
+  color: var(--text-dim);
+  text-decoration: none;
+  font-size: 0.95rem;
+  transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.docs-nav-link:hover,
+.docs-nav-link:focus-visible {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.docs-nav-link.is-active {
+  color: var(--accent-prompt);
+  border-left-color: var(--accent-prompt);
+  font-weight: 600;
+}
+
+/* ---------- Content pane ---------- */
+
+.docs-content {
+  min-width: 0;
+}
+
+/* Sections are only hidden once JS takes over the nav, so the page still shows
+   everything (stacked) if the script fails to load. */
+.js-docs .docs-section {
+  display: none;
+}
+
+.js-docs .docs-section.is-active {
+  display: block;
+}
+
+.docs-section + .docs-section {
+  margin-top: 3rem;
+}
+
+.js-docs .docs-section + .docs-section {
+  margin-top: 0;
+}
+
+.docs-section:focus {
+  outline: none;
+}
+
+.docs-section-title {
+  margin: 0 0 0.5rem;
+  font-size: 1.75rem;
+}
+
+.docs-section-intro {
+  margin: 0 0 2rem;
+  color: var(--text-dim);
+  max-width: 62ch;
+}
+
+/* ---------- Certification ---------- */
+
+.cert {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--accent-prompt);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+}
+
+.cert-summary {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  padding: 1.4rem 1.75rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.cert-summary::-webkit-details-marker {
+  display: none;
+}
+
+.cert-summary:hover,
+.cert-summary:focus-visible {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cert-heading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.cert-name {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.cert-meta {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+}
+
+.cert-toggle {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 0.85rem;
+  color: var(--accent-prompt);
+  white-space: nowrap;
+}
+
+.cert-chevron,
+.prompt-chevron {
+  display: inline-block;
+  transition: transform 0.2s ease;
+}
+
+.cert[open] .cert-chevron,
+.prompt-details[open] .prompt-chevron {
+  transform: rotate(180deg);
+}
+
+.cert-body {
+  padding: 0 1.75rem 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cert-facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  padding: 1.25rem 0;
+}
+
+.cert-fact {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+}
+
+.cert-fact-label {
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  color: var(--text-dim);
+}
+
+.cert-fact-value {
+  font-size: 0.92rem;
+}
+
+.cert-fact-value a {
+  color: var(--accent-prompt);
+  text-decoration: none;
+}
+
+.cert-fact-value a:hover,
+.cert-fact-value a:focus-visible {
+  text-decoration: underline;
+}
+
+.cert-pdf {
+  background: rgba(0, 0, 0, 0.22);
+  border-radius: 10px;
+  padding: 0.75rem;
+}
+
+/* The certificate is landscape (792x612), so hold that aspect ratio. */
+.cert-pdf-frame {
+  display: block;
+  width: 100%;
+  aspect-ratio: 792 / 612;
+  min-height: 260px;
+  border: 0;
+  border-radius: 6px;
+  background: #2f2f34;
+}
+
+.cert-pdf-fallback {
+  margin: 0.75rem 0 0.15rem;
+  font-size: 0.82rem;
+  color: var(--text-dim);
+  text-align: center;
+}
+
+.cert-pdf-fallback a {
+  color: var(--accent-prompt);
+}
+
+.cert-download {
+  display: inline-block;
+  margin-top: 1.25rem;
+  padding: 0.55rem 1.1rem;
+  border-radius: 999px;
+  background: var(--accent-prompt);
+  color: var(--text-on-accent);
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: filter 0.2s ease;
+}
+
+.cert-download:hover,
+.cert-download:focus-visible {
+  filter: brightness(1.1);
+}
+
+/* ---------- Portfolio ---------- */
+
+.prompt-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.prompt-card {
+  background: var(--card-bg);
+  border-radius: var(--radius);
+  border-left: 3px solid var(--accent-prompt);
+  overflow: hidden;
+}
+
+.prompt-summary {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 1.4rem 1.75rem;
+  cursor: pointer;
+  list-style: none;
+}
+
+.prompt-summary::-webkit-details-marker {
+  display: none;
+}
+
+.prompt-summary:hover,
+.prompt-summary:focus-visible {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.prompt-summary-main {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.45rem;
+}
+
+.prompt-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+}
+
+.prompt-teaser {
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.prompt-chevron {
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+
+.prompt-body {
+  padding: 0 1.75rem 1.75rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prompt-context {
+  margin: 1.25rem 0 1.75rem;
+  color: var(--text-dim);
+  font-size: 0.92rem;
+}
+
+.prompt-stage {
+  margin-bottom: 1.75rem;
+}
+
+.prompt-stage-label,
+.prompt-eval-label {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  margin: 0 0 0.7rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+
+.prompt-stage-badge {
+  font-size: 0.66rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  background: rgba(0, 0, 0, 0.3);
+  color: var(--text-dim);
+}
+
+.prompt-stage-badge--v1 {
+  border: 1px solid rgba(255, 255, 255, 0.18);
+}
+
+.prompt-stage-badge--final {
+  background: var(--accent-prompt);
+  color: var(--text-on-accent);
+}
+
+/* Code block with copy button */
+.prompt-block {
+  position: relative;
+  background: rgba(0, 0, 0, 0.28);
+  border-radius: 10px;
+}
+
+.prompt-block pre {
+  margin: 0;
+  padding: 1.1rem 1.15rem;
+  overflow-x: auto;
+  /* leave room for the copy button on the first line */
+  padding-right: 5.25rem;
+}
+
+.prompt-block code {
+  font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  font-size: 0.83rem;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  word-break: break-word;
+  color: var(--text);
+}
+
+.prompt-copy {
+  position: absolute;
+  top: 0.6rem;
+  right: 0.6rem;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-dim);
+  border: none;
+  border-radius: 6px;
+  padding: 0.3rem 0.6rem;
+  font-size: 0.72rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.prompt-copy:hover,
+.prompt-copy:focus-visible {
+  background: rgba(255, 255, 255, 0.24);
+  color: var(--text);
+}
+
+.prompt-copy.is-copied {
+  background: var(--accent-prompt);
+  color: var(--text-on-accent);
+}
+
+.prompt-problem {
+  margin: 0.9rem 0 0;
+  padding: 0.8rem 1rem;
+  border-left: 2px solid var(--accent-acting);
+  background: rgba(0, 0, 0, 0.15);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9rem;
+  color: var(--text-dim);
+}
+
+.prompt-problem strong {
+  color: var(--accent-acting);
+}
+
+.prompt-eval {
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.prompt-eval p {
+  margin: 0;
+  font-size: 0.92rem;
+  color: var(--text-dim);
+}
+
+/* ---------- Small screens: nav becomes a horizontal tab strip ---------- */
+
+@media (max-width: 720px) {
+  .docs-layout {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    padding-top: 1.75rem;
+  }
+
+  .docs-sidebar {
+    position: static;
+  }
+
+  .docs-nav-list {
+    display: flex;
+    gap: 0.5rem;
+    border-left: none;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+  }
+
+  .docs-nav-link {
+    margin-left: 0;
+    margin-bottom: -1px;
+    border-left: none;
+    border-bottom: 2px solid transparent;
+    padding: 0.5rem 0.75rem;
+  }
+
+  .docs-nav-link.is-active {
+    border-left-color: transparent;
+    border-bottom-color: var(--accent-prompt);
+  }
+
+  .cert-summary,
+  .prompt-summary {
+    padding: 1.15rem 1.25rem;
+  }
+
+  .cert-body,
+  .prompt-body {
+    padding: 0 1.25rem 1.5rem;
+  }
+
+  .prompt-block pre {
+    padding-right: 1.15rem;
+    padding-top: 2.6rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .docs-nav-link,
+  .cert-chevron,
+  .prompt-chevron,
+  .prompt-copy,
+  .cert-download {
+    transition: none;
+  }
+}

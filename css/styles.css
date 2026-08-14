@@ -12,6 +12,7 @@
 
   --accent-acting: #e0a458;
   --accent-writing: #4fc3c9;
+  --accent-prompting: #7fc98a;
   --accent-gamedev: #9b6fd1;
   --accent-dancing: #e0559e;
   --accent-games: #9b6fd1;
@@ -213,6 +214,18 @@ body {
 .card--soon:hover .card-badge {
   background: rgba(255, 255, 255, 0.35);
   color: var(--text-on-accent);
+}
+
+/* Small uppercase category pill — used on writing, stories, and prompting pages. */
+.tag-pill {
+  display: inline-block;
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--text-dim);
+  background: rgba(0, 0, 0, 0.25);
+  border-radius: 999px;
+  padding: 0.25rem 0.6rem;
 }
 
 .site-footer {

@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Prompt Engineering — Mickey Farmer</title>
+  <meta name="description" content="Prompt engineering work from Mickey Farmer — certification and a portfolio of prompts, shown from rough first draft through final version." />
+  <link rel="stylesheet" href="css/styles.css" />
+  <link rel="stylesheet" href="css/prompting.css" />
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="back-link" href="index.html">&larr; Back</a>
+    <h1 class="site-title">Prompt Engineering</h1>
+    <p class="site-subtitle">Certifications, plus a portfolio of prompts shown the honest way — rough first pass, what was wrong with it, and where it landed.</p>
+  </header>
+
+  <div class="docs-layout">
+
+    <!-- Left-hand documentation nav -->
+    <aside class="docs-sidebar">
+      <nav class="docs-nav" aria-label="Prompt Engineering sections">
+        <p class="docs-nav-label">Prompt Engineering</p>
+        <ul class="docs-nav-list">
+          <li>
+            <a class="docs-nav-link is-active" href="#certification" data-section="certification">Certification</a>
+          </li>
+          <li>
+            <a class="docs-nav-link" href="#portfolio" data-section="portfolio">Portfolio</a>
+          </li>
+        </ul>
+      </nav>
+    </aside>
+
+    <main class="docs-content">
+
+      <!-- ==================== CERTIFICATION ==================== -->
+      <section class="docs-section is-active" id="certification" data-section="certification" tabindex="-1">
+        <h2 class="docs-section-title">Certification</h2>
+        <p class="docs-section-intro">
+          Coursework completed in prompt design, pattern-based prompting, and evaluating model output.
+        </p>
+
+        <!-- Duplicate this <details class="cert"> block to add another certification. -->
+        <details class="cert">
+          <summary class="cert-summary">
+            <span class="cert-heading">
+              <span class="cert-name">Prompt Engineering for ChatGPT</span>
+              <span class="cert-meta">August 2026 &middot; Vanderbilt University via Coursera</span>
+            </span>
+            <span class="cert-toggle" aria-hidden="true">
+              <span class="cert-toggle-text">View certificate</span>
+              <span class="cert-chevron">&#9662;</span>
+            </span>
+          </summary>
+
+          <div class="cert-body">
+            <div class="cert-facts">
+              <div class="cert-fact">
+                <span class="cert-fact-label">Issued</span>
+                <span class="cert-fact-value">August 13, 2026</span>
+              </div>
+              <div class="cert-fact">
+                <span class="cert-fact-label">Instructor</span>
+                <span class="cert-fact-value">Dr. Jules White, Dept. of Computer Science</span>
+              </div>
+              <div class="cert-fact">
+                <span class="cert-fact-label">Credential</span>
+                <span class="cert-fact-value">
+                  <a href="https://coursera.org/verify/QXN89R6IH4BI" target="_blank" rel="noopener">Verify on Coursera &#8599;</a>
+                </span>
+              </div>
+            </div>
+
+            <div class="cert-pdf">
+              <iframe
+                class="cert-pdf-frame"
+                title="Prompt Engineering for ChatGPT certificate (PDF)"
+                data-src="assets/certificates/vanderbilt-prompt-engineering-coursera.pdf#view=FitH"
+                loading="lazy"></iframe>
+              <p class="cert-pdf-fallback">
+                PDF not displaying?
+                <a href="assets/certificates/vanderbilt-prompt-engineering-coursera.pdf" target="_blank" rel="noopener">Open it in a new tab &#8599;</a>
+              </p>
+            </div>
+
+            <a class="cert-download" href="assets/certificates/vanderbilt-prompt-engineering-coursera.pdf" download>
+              Download PDF
+            </a>
+          </div>
+        </details>
+      </section>
+
+      <!-- ==================== PORTFOLIO ==================== -->
+      <section class="docs-section" id="portfolio" data-section="portfolio" tabindex="-1">
+        <h2 class="docs-section-title">Portfolio</h2>
+        <p class="docs-section-intro">
+          Each card shows the same prompt three ways: the rough first attempt, what was actually
+          wrong with it, and the version worth keeping — plus how I'd check that it works.
+        </p>
+
+        <div class="prompt-list">
+
+          <!--
+            To add a prompt: copy one <article class="prompt-card"> block and fill it in.
+            The copy buttons wire themselves up to any .prompt-block on the page.
+          -->
+          <article class="prompt-card">
+            <details class="prompt-details" open>
+              <summary class="prompt-summary">
+                <span class="prompt-summary-main">
+                  <span class="tag-pill">Evaluation / Scoring</span>
+                  <span class="prompt-title">Docs Clarity Rubric</span>
+                  <span class="prompt-teaser">Grades documentation against defined criteria with structured, comparable output.</span>
+                </span>
+                <span class="prompt-chevron" aria-hidden="true">&#9662;</span>
+              </summary>
+
+              <div class="prompt-body">
+                <p class="prompt-context">
+                  This mirrors AQM-style work: grading content against defined criteria, with
+                  structured output you can compare across docs and across reviewers.
+                </p>
+
+                <div class="prompt-stage">
+                  <h4 class="prompt-stage-label">
+                    <span class="prompt-stage-badge prompt-stage-badge--v1">v1</span>
+                    Rough first pass
+                  </h4>
+                  <div class="prompt-block">
+                    <button class="prompt-copy" type="button">Copy</button>
+                    <pre><code>Read this documentation and tell me if it's good or bad.</code></pre>
+                  </div>
+                  <p class="prompt-problem">
+                    <strong>Problem:</strong> Way too vague. No criteria, no output format, no way to
+                    compare results across docs or reviewers. "Good or bad" isn't actionable.
+                  </p>
+                </div>
+
+                <div class="prompt-stage">
+                  <h4 class="prompt-stage-label">
+                    <span class="prompt-stage-badge prompt-stage-badge--final">Final</span>
+                    Final version
+                  </h4>
+                  <div class="prompt-block">
+                    <button class="prompt-copy" type="button">Copy</button>
+                    <pre><code>You are a technical documentation reviewer. Evaluate the article below against these 5 criteria, scoring each 1-5:
+
+1. CLARITY: Can a reader unfamiliar with the topic follow it on first read?
+2. COMPLETENESS: Are prerequisites, steps, and expected outcomes all covered?
+3. STRUCTURE: Are headings, lists, and code blocks used appropriately for scannability?
+4. ACCURACY OF TONE: Does it match our style guide (active voice, second person, no jargon without definition)?
+5. ACTIONABILITY: Could someone complete the task using only this doc?
+
+For each criterion, provide:
+- Score (1-5)
+- One-sentence justification
+- If score is below 4, one specific fix
+
+End with an overall PASS/FAIL (PASS = no criterion below 3, average &#8805; 4).
+
+Article:
+[INSERT TEXT]</code></pre>
+                  </div>
+                </div>
+
+                <div class="prompt-eval">
+                  <h4 class="prompt-eval-label">How I'd evaluate it</h4>
+                  <p>
+                    Run it against 10 docs I already know are strong vs. weak (from past editing
+                    experience), check whether the AI's PASS/FAIL matches my own judgment, and adjust
+                    the rubric language wherever it disagrees with me — the same precision/recall idea
+                    as call scoring.
+                  </p>
+                </div>
+              </div>
+            </details>
+          </article>
+
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <footer class="site-footer">
+    <p>&copy; <span id="year"></span> Mickey Farmer</p>
+  </footer>
+
+  <script src="js/script.js"></script>
+  <script src="js/prompting.js"></script>
+</body>
+</html>

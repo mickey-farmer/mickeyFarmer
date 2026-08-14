@@ -48,16 +48,7 @@
   margin-bottom: 0.6rem;
 }
 
-.tag-pill {
-  display: inline-block;
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  color: var(--text-dim);
-  background: rgba(0, 0, 0, 0.25);
-  border-radius: 999px;
-  padding: 0.25rem 0.6rem;
-}
+/* .tag-pill now lives in css/styles.css so every page can use it. */
 
 .writing-entry-title {
   margin: 0 0 0.6rem;
