@@ -241,6 +241,107 @@ Meeting notes:
             </details>
           </article>
 
+          <article class="prompt-card">
+            <details class="prompt-details">
+              <summary class="prompt-summary">
+                <span class="prompt-summary-main">
+                  <span class="tag-pill">Structured Output / Schema</span>
+                  <span class="prompt-title">Reservation Booking Schema</span>
+                  <span class="prompt-teaser">Constrains a booking assistant to a strict JSON contract so invalid requests fail loudly instead of silently.</span>
+                </span>
+                <span class="prompt-chevron" aria-hidden="true">&#9662;</span>
+              </summary>
+
+              <div class="prompt-body">
+                <p class="prompt-context">
+                  Once a model's output feeds another system, prose instructions stop being enough.
+                  A schema moves the rules out of the prompt and into something a validator can
+                  enforce — the model can still be wrong, but it can't be wrong in a shape the
+                  downstream code isn't expecting.
+                </p>
+
+                <div class="prompt-stage">
+                  <h4 class="prompt-stage-label">
+                    <span class="prompt-stage-badge prompt-stage-badge--v1">v1</span>
+                    Rough first pass
+                  </h4>
+                  <div class="prompt-block">
+                    <button class="prompt-copy" type="button">Copy</button>
+                    <pre><code>Take the customer's reservation request and return it as JSON with the party size, date, seating preference, and any notes.</code></pre>
+                  </div>
+                  <p class="prompt-problem">
+                    <strong>Problem:</strong> "As JSON" describes a format, not a contract. Key names
+                    drift between runs (<code>partySize</code> vs. <code>party_size</code>), dates come back as
+                    "next Friday," seating comes back as "patio" when the system only knows
+                    <code>outdoor</code>, and a 200-person party sails through unchallenged. Every one of
+                    those failures lands in the booking system, not in the prompt.
+                  </p>
+                </div>
+
+                <div class="prompt-stage">
+                  <h4 class="prompt-stage-label">
+                    <span class="prompt-stage-badge prompt-stage-badge--final">Final</span>
+                    Final version
+                  </h4>
+                  <div class="prompt-block">
+                    <button class="prompt-copy" type="button">Copy</button>
+                    <pre><code>You are parsing a restaurant reservation request into a booking record.
+
+Return a single JSON object conforming exactly to this schema:
+
+{
+  "type": "object",
+  "properties": {
+    "party_size": { "type": "integer", "minimum": 1, "maximum": 20 },
+    "reservation_date": { "type": "string", "format": "date" },
+    "seating": { "type": "string", "enum": ["indoor", "outdoor", "bar"] },
+    "notes": { "type": "string", "maxLength": 200 }
+  },
+  "additionalProperties": false,
+  "required": ["party_size", "reservation_date"]
+}
+
+Rules:
+- Resolve relative dates ("this Saturday") against TODAY = {{TODAY}} and output ISO 8601 (YYYY-MM-DD).
+- Map informal seating language to the nearest enum value (patio/terrace &rarr; outdoor, counter &rarr; bar). If it maps to nothing, omit the field rather than guessing.
+- Omit optional fields entirely instead of sending null or "".
+- Truncate notes to the 200-character limit, keeping dietary and accessibility details first.
+- If the request violates a constraint (party of 40, a date in the past), return instead:
+  { "error": "constraint_violation", "field": "&lt;field name&gt;", "reason": "&lt;one sentence&gt;" }
+
+Return only the JSON object. No prose, no code fences.
+
+Request:
+[INSERT TEXT]</code></pre>
+                  </div>
+                </div>
+
+                <div class="prompt-eval">
+                  <h4 class="prompt-eval-label">Why the schema is written this way</h4>
+                  <p>
+                    <code>additionalProperties: false</code> is doing the most work here — without it the model
+                    happily invents a <code>phone_number</code> field and the parser accepts it. The
+                    <code>enum</code> on <code>seating</code> collapses an open-ended string into three values the
+                    booking system actually supports, and <code>minimum</code>/<code>maximum</code> on
+                    <code>party_size</code> catches the large-party case that should be routed to events
+                    instead. <code>notes</code> stays optional and capped so a rambling request can't
+                    become an unbounded write.
+                  </p>
+                  <p>
+                    <strong>How I'd evaluate it:</strong> validate every response against the schema
+                    programmatically rather than reading them — a prompt like this either passes or it
+                    doesn't. Then run a set of deliberately hostile inputs (party of 40, yesterday's
+                    date, "somewhere quiet," a 900-character note, an empty message) and confirm each
+                    one produces the error object rather than a plausible-looking record. The failure
+                    mode I'd watch for is the model inventing a <code>reservation_date</code> when the
+                    customer never gave one, since that's a required field and it'll be tempted to
+                    fill it.
+                  </p>
+                </div>
+              </div>
+            </details>
+          </article>
+
         </div>
       </section>
 
