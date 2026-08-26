@@ -42,6 +42,7 @@ const SITE = [
       { label: "Technical Writing", href: "certifications.html#technical-writing", page: "certifications", hash: "technical-writing" },
       { label: "API Documentation", href: "certifications.html#api-documentation", page: "certifications", hash: "api-documentation" },
       { label: "Prompt Engineering", href: "certifications.html#prompt-engineering", page: "certifications", hash: "prompt-engineering" },
+      { label: "AI Engineering", href: "certifications.html#ai-engineering", page: "certifications", hash: "ai-engineering" },
       { label: "Engineering", href: "certifications.html#engineering", page: "certifications", hash: "engineering" },
       { label: "Project Management", href: "certifications.html#project-management", page: "certifications", hash: "project-management" },
       { label: "Game Design", href: "certifications.html#game-design", page: "certifications", hash: "game-design" },

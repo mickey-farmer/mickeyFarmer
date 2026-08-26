@@ -120,6 +120,23 @@ window.CERT_GROUPS = [
     ],
   },
   {
+    id: "ai-engineering",
+    label: "AI Engineering",
+    blurb: "Building with coding agents, not just prompting chat models.",
+    certs: [
+      {
+        title: "Claude Code: Software Engineering with Generative AI Agents",
+        issuer: "Vanderbilt University via Coursera",
+        date: "August 26, 2026",
+        sort: "2026-08-26",
+        file: "vanderbilt-claude-code-software-engineering.pdf",
+        landscape: true,
+        instructor: "Dr. Jules White, Dept. of Computer Science",
+        verifyUrl: "https://coursera.org/verify/BDR6SH51XK7R",
+      },
+    ],
+  },
+  {
     id: "engineering",
     label: "Engineering",
     blurb: "Enough of the stack to read it, test it, and document it honestly.",
